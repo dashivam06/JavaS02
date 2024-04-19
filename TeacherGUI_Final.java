@@ -314,9 +314,9 @@ class MyFrame extends JFrame {
 
                 try {
                 // Input validation
-                if (!isValidInput(teacherID, gradeStr, yearStr)) {
+                if (!isValidInput(teacherID, gradeStr, yearStr,department)) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please check your entries for ID, GradedScore and YOE.");
+                            "Invalid input! Please check your entries for ID, GradedScore,Department and YOE.");
                     return;
                 }
 
@@ -520,7 +520,7 @@ class MyFrame extends JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Invalid input! Please fill input f1ields with their specific values only.");
+                    "Invalid input! Please fill input fields with their specific values only.");
             return null;
         }catch(Exception y){
             JOptionPane.showMessageDialog(null,
@@ -557,21 +557,38 @@ class MyFrame extends JFrame {
             }
         }
     }
-
+/* Using Variable Arguments
     // for cheaking isValidMethod
     private boolean isValidInput(String... inputs) {
         for (String input : inputs) {
-            if (input.equals("")) {
+            String a = input.trim();
+            if (a.equals("")) {
                 return false;
             }
         }
         return true;
     }
+    */
 
     // Method OverLoading
 
+    private boolean isValidInput(String a)
+    {
+        if(a.equals("")){
+            return false;
+        }
+        return true;
+    }
+    
     private boolean isValidInput(String a, String b, String c) {
         if ((a.equals("")) || (b.equals("")) || (c.equals(""))) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isValidInput(String a, String b, String c,String d) {
+        if ((a.equals("")) || (b.equals("")) || (c.equals(""))||(d.equals(""))) {
             return false;
         }
         return true;
@@ -634,7 +651,7 @@ class MyFrame extends JFrame {
             System.out.println("  ".repeat(40) + "Lecturers Deatils");
 
             System.out.println(" " + "-------------------------".repeat(7));
-            System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s |\n",
+            System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s  |\n",
                     "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
                     "Working Hour", "Department", "Year Of Experience");
             System.out.println(
@@ -643,7 +660,7 @@ class MyFrame extends JFrame {
             for (Teacher teacher : teachers) {
                 if (teacher instanceof Lecturer) {
                     Lecturer lecturer = (Lecturer) teacher;
-                    System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s |\n",
+                    System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s  |\n",
                             lecturer.getteacher_id(), lecturer.getname(), lecturer.getaddress(),
                             lecturer.getworking_type(), lecturer.getemployment_status(),
                             lecturer.getworking_hours(), lecturer.getdepartment(),
@@ -677,7 +694,7 @@ class MyFrame extends JFrame {
 
             System.out.println(
                     " " + "-------------------------".repeat(7));
-            System.out.printf("| %-5s | %-15s | %-12s | %-13s | %-17s | %-12s | %-12s | %-20s | %-20s | %-18s |\n",
+            System.out.printf("| %-5s | %-15s | %-18s | %-13s | %-17s | %-12s | %-12s | %-16s | %-20s | %-16s |\n",
                     "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
                     "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index");
             System.out.println(
@@ -688,7 +705,7 @@ class MyFrame extends JFrame {
                     Tutor tutor = (Tutor) teacher;
 
                     System.out.printf(
-                            "| %-5s | %-15s | %-12s | %-13s | %-17s | %-12s | %-12s | %-20s | %-21s  | %-18s |\n",
+                            "| %-5s | %-15s | %-18s | %-13s | %-17s | %-12s | %-12s | %-16s | %-22s | %-16s  |\n",
                             tutor.getteacher_id(), tutor.getname(), tutor.getaddress(),
                             tutor.getworking_type(), tutor.getemployment_status(),
                             tutor.getworking_hours(), tutor.getsalary(), tutor.getspecialization(),
