@@ -320,9 +320,16 @@ class MyFrame extends JFrame {
                     return;
                 }
 
+
                 int teacherId = Integer.parseInt(teacherID);
                 int gradedScore = Integer.parseInt(gradeStr);
                 int yearsOfExperience = Integer.parseInt(yearStr);
+
+                if(isNegative(teacherId,gradedScore,yearsOfExperience)){
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Input Field cannot be less than zero.");
+                    return;
+                }
 
                 // cheaking identity of lecturer to know if they exists already or not
                 Lecturer lecturer = findLecturer(teacherId);
@@ -373,6 +380,12 @@ class MyFrame extends JFrame {
                 int salary = Integer.parseInt(salaryStr);
                 int performanceIndex = Integer.parseInt(performanceStr);
 
+                if(isNegative(teacherId,salary,performanceIndex)){
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Input Field cannot be less than zero.");
+                    return;
+                }
+
                 // Finding tutor to know if they exists already or not
                 Tutor tutor = findTutor(teacherId);
                 if (tutor != null) {
@@ -412,6 +425,12 @@ class MyFrame extends JFrame {
                 }
 
                 int teacherId = Integer.parseInt(teacherID);
+
+                if(isNegative(teacherId)){
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Input Field cannot be less than zero.");
+                    return;
+                }
 
                 Tutor tutor = (Tutor) findTutor(teacherId);
                 if (tutor != null) {
@@ -456,6 +475,11 @@ class MyFrame extends JFrame {
                 int workingHours = Integer.parseInt(workingHoursStr);
                 int yearOfExperience = Integer.parseInt(yearOfExperienceStr);
 
+                if(isNegative(teacherId,workingHours,yearOfExperience)){
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Input Field cannot be less than zero.");
+                    return null;
+                }
                 // new Lecturer object
                 Lecturer lecturer = new Lecturer(teacherId, teacherName, address, workingType, employmentStatus,
                         workingHours, department, yearOfExperience);
@@ -506,6 +530,12 @@ class MyFrame extends JFrame {
                 int salary = Integer.parseInt(salaryStr);
                 int performanceIndex = Integer.parseInt(performanceIndexStr);
 
+                if(isNegative(teacherId,workingHours,salary,performanceIndex)){
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Input Field cannot be less than zero.");
+                    return null;
+                }
+
                 // new Tutor object
                 Tutor tutor = new Tutor(teacherId, teacherName, address, workingType, employmentStatus, workingHours,
                         salary, specialization, academyQualification, performanceIndex);
@@ -530,6 +560,7 @@ class MyFrame extends JFrame {
         return null;
     }
 
+   
     // for clearing all textFields
     public void clearTextField() {
         teacherIDTextField.setText("");
@@ -610,6 +641,33 @@ class MyFrame extends JFrame {
         }
         return true;
     }
+
+
+    // Cheak For Negative Ones 
+
+    private boolean isNegative(int a)
+    {
+        if(a<0){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNegative(int a,int b,int c)
+    {
+        if((a<0)||(b<0)||(c<0)){
+            return true;
+        }
+        return false;
+    }
+    private boolean isNegative(int a,int b,int c,int d)
+    {
+        if((a<0)||(b<0)||(c<0)||(d<0)){
+            return true;
+        }
+        return false;
+    }
+
 
     private Lecturer findLecturer(int teacherId) {
         for (Teacher teacher : teachers) {

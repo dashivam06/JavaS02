@@ -52,17 +52,24 @@ public class Tutor extends Teacher
             if((performance_index>=5)&&(performance_index<=7))
             {
                 this.salary=salary+((double)5/100)*salary;
+                this.isCertified=true;
+                return true;
             }
             else if((performance_index>=8)&&(performance_index<=9))
             {
                 this.salary=salary+((double)10/100)*salary;
+                this.isCertified=true;
+                return true;
             }
             else if (performance_index==10)
             {
                 this.salary=salary+((double)20/100)*salary;
+                this.isCertified=true;
+                return true;
             }
-            this.isCertified=true;
-            return true;
+            else{
+                return false;
+            }
             
         }
         else
