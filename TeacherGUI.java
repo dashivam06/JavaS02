@@ -1,4 +1,5 @@
 
+// Importing Essentials 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 
 class MyFrame extends JFrame {
 
-    ArrayList<Teacher> teachers = new ArrayList<>(); // will store teachers
+    // ArrayList Declaration to Store Lecturer and Tutors Of Teacher Class
+    ArrayList<Teacher> teachers = new ArrayList<>();
 
     // decleration of every JLabel Elements used in program
     JLabel teacherIDLabel, teacherNameLabel, addressLabel, workingTypeLabel,
@@ -23,26 +25,33 @@ class MyFrame extends JFrame {
             specializationTextField;
 
     MyFrame() { // constructor
-        setTitle("Teacher GUI Project ");
+        setTitle("Teacher Database Portal ");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 300);
-        setLocation(150, 180);
+        setSize(1600, 900);
+        setLocation(150, 20);
 
-        GridLayout gridLayout = new GridLayout(3, 6); // for entire frame
+        GridLayout gridLayout = new GridLayout(3, 4); // for entire frame
 
         // for positioning elements onto frame with points
         GridBagConstraints gbc = new GridBagConstraints();
         setLayout(gridLayout); // setting gridlayout to frame
 
-        // For Teacher
+        // For Teacher Input Fields **(Mandatory)
 
         // Initializing JLabels
-        teacherIDLabel = new JLabel("Teacher ID:");
-        teacherNameLabel = new JLabel("Teacher Name:");
-        addressLabel = new JLabel("Address:");
-        workingTypeLabel = new JLabel("Working Type:");
-        employmentStatusLabel = new JLabel("Employment Status:");
-        workingHoursLabel = new JLabel("Working Hours:");
+        teacherIDLabel = new JLabel("Teacher ID   :");
+        teacherNameLabel = new JLabel("Teacher Name   :");
+        addressLabel = new JLabel("Address   :");
+        workingTypeLabel = new JLabel("Working Type   :");
+        employmentStatusLabel = new JLabel("Employment Status   :");
+        workingHoursLabel = new JLabel("Working Hours   :");
+
+        teacherIDLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        teacherNameLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        workingTypeLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        addressLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        employmentStatusLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        workingHoursLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 
         // Initializing JTextFields
         teacherIDTextField = new JTextField(10);
@@ -77,40 +86,63 @@ class MyFrame extends JFrame {
         // Adding the panel to the frame and positioning it.
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 6;
+        gbc.gridwidth = 4;
         this.add(teacherPanel, gbc);
+
+        // Creating panel for 2nd row to include instructions,displaytutor and
 
         // For Clear and Display Button
 
-        // Creating panel for 2nd row to include instructions,displaytutor and
         // displayLecturer
         JPanel teacherButtonPanel = new JPanel(new BorderLayout());
-
         JButton displayTutor = new JButton("Display Tutor Details");
         JButton displayLecturer = new JButton("Display Lecturer Details");
-        JButton clearButton = new JButton("Clear all input fields");
 
+        // clear Button
+        JButton clearButton = new JButton("Clear All Input Fields");
+
+        // Changing Fonts And Backgrounds
+        clearButton.setFont(new Font("Consolas", Font.BOLD, 16));
+        clearButton.setForeground(new Color(60, 90, 111));
+        clearButton.setBackground(new Color(199, 188, 161));
+        displayLecturer.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        displayLecturer.setBackground(new Color(232, 246, 239));
+        displayTutor.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        displayTutor.setForeground(Color.BLACK);
+        displayTutor.setBackground(new Color(232, 246, 239));
+
+        // Will Contain Instructionn in 2nd Panel
         JPanel forNote = new JPanel(new GridLayout(10, 1));
 
         // Instructions to be followed
-        JLabel note = new JLabel("    Instructions   : ");
+        JLabel note = new JLabel(" Instructions : ");
         JLabel instruction1 = new JLabel(
-                "             1)   Please fill all the required input fields with valid values only .");
+                "     1)   Please fill all the required input fields with valid values only .");
         JLabel instruction2 = new JLabel(
-                "             2)   To add Lecturer provide with Teacher Id, Teacher Name, Address, Working Type, Employment Status, Working Hour, Year of Experience and Department accurately.");
+                "     2)   To add Lecturer provide with Teacher Id, Teacher Name, Address, Working Type, Employment Status, Working Hour, Year of Experience and Department Name.  ");
         JLabel instruction3 = new JLabel(
-                "             3)   To add Tutor provide with Teacher Id, Teacher Name, Address, Working Type, Employment Status, Working Hour, Salary, Performance Index, ");
+                "     3)   To add Tutor provide with Teacher Id, Teacher Name, Address, Working Type, Employment Status, Working Hour, Salary, Performance Index, ");
         JLabel subinstruction3 = new JLabel(
-                "                             Academic Qualification and Specialization accurately.");
+                "                  Academic Qualification and Specialization accurately.");
         JLabel instruction4 = new JLabel(
-                "             4)   To assign grades provide with Teacher Id, Graded Score, Year of Experience ( YOE ) and Department in their respective input fields .");
+                "     4)   To assign grades provide with Teacher Id, Graded Score, Year of Experience ( YOE ) and Department in their respective input fields .");
         JLabel instruction5 = new JLabel(
-                "             5)   To set salary provide with correct Teacher ID, Salary and Performance Index in their respective input fields accurately .");
+                "     5)   To set salary provide with correct Teacher ID, Salary and Performance Index in their respective input fields accurately .");
         JLabel instruction6 = new JLabel(
-                "             3)   To remove Tutor provide with correct Tutor ID in Teacher ID Field.");
+                "     6)   To remove Tutor provide with correct Tutor ID in Teacher ID Field.");
         JLabel instruction7 = new JLabel(
-                "             5)   To display Lecturer's or Tutor's details kindly check console window ( Terminal ) . ");
-        clearButton.setBackground(Color.RED);
+                "     7)   To display Lecturer's or Tutor's details kindly check console window ( Terminal ) . ");
+
+        // Setting Font for the Instruction Portion
+        note.setFont(new Font("Consolas", Font.BOLD, 15));
+        instruction1.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction2.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction3.setFont(new Font("Verdana", Font.PLAIN, 13));
+        subinstruction3.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction4.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction5.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction6.setFont(new Font("Verdana", Font.PLAIN, 13));
+        instruction7.setFont(new Font("Verdana", Font.PLAIN, 13));
 
         // adding instruction elements to instruction panel
         forNote.add(note);
@@ -133,6 +165,7 @@ class MyFrame extends JFrame {
 
         JPanel displayTeachersPanel = new JPanel(new GridLayout(1, 2)); // includes 2 button for displayig tutor and
                                                                         // lecturer
+
         displayTeachersPanel.add(displayLecturer);
         displayTeachersPanel.add(displayTutor);
 
@@ -144,7 +177,7 @@ class MyFrame extends JFrame {
         // Adding the panel to the frame
         gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridwidth = 6;
+        gbc.gridwidth = 4;
 
         this.add(teacherButtonPanel);
 
@@ -153,7 +186,11 @@ class MyFrame extends JFrame {
         // Initializing JLabels
         departmentLabel = new JLabel("Department    :");
         gradedScoreLabel = new JLabel("Graded Score   :");
-        yearOfExperienceLabel = new JLabel("Year Of Experience  :");
+        yearOfExperienceLabel = new JLabel("Year Of Experience   :");
+
+        departmentLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        gradedScoreLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        yearOfExperienceLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 
         // Initializing JTextFields
         departmentTextField = new JTextField(15);
@@ -163,6 +200,11 @@ class MyFrame extends JFrame {
         // Buttons for Lecturer functions
         JButton addLecturerButton = new JButton("Add Lecturer");
         JButton gradeAssignmentButton = new JButton("Grade Assignment");
+
+        addLecturerButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        addLecturerButton.setBackground(new Color(176, 197, 164));
+        gradeAssignmentButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        gradeAssignmentButton.setBackground(new Color(255, 251, 218));
 
         // Creating lecturerPanel to group different elemets of Lecturer
         JPanel lecturerPanel = new JPanel(new GridLayout(3, 2, 50, 5));
@@ -193,10 +235,15 @@ class MyFrame extends JFrame {
         // Adding Tutor Class
 
         // Initializing JLabels
-        salaryLabel = new JLabel("Salary:");
-        performanceIndexLabel = new JLabel("Performance Index:");
-        academyQualificationLabel = new JLabel("Academy Qualification:");
-        specializationLabel = new JLabel("Specialization:");
+        salaryLabel = new JLabel("Salary   :");
+        performanceIndexLabel = new JLabel("Performance Index   :");
+        academyQualificationLabel = new JLabel("Academy Qualification   :");
+        specializationLabel = new JLabel("Specialization   :");
+
+        salaryLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        performanceIndexLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        academyQualificationLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+        specializationLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 
         // Initializing JTextFields
         salaryTextField = new JTextField(10);
@@ -208,6 +255,14 @@ class MyFrame extends JFrame {
         JButton addTutorButton = new JButton("Add Tutor");
         JButton removeTutorButton = new JButton("Remove Tutor");
         JButton setSalaryButton = new JButton("Set Salary");
+
+        addTutorButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        addTutorButton.setBackground(new Color(176, 197, 164));
+        setSalaryButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        setSalaryButton.setBackground(new Color(170, 215, 217));
+        removeTutorButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
+        removeTutorButton.setBackground(new Color(255, 128, 128));
+        removeTutorButton.setForeground(Color.BLACK);
 
         // tutorpanel panel for grouping the buttons,txtfield and labels
         JPanel tutorpanel = new JPanel(new GridLayout(4, 2, 50, 5));
@@ -245,14 +300,14 @@ class MyFrame extends JFrame {
         // Adding majorPanel to the frame
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth = 6;
+        gbc.gridwidth = 4; // let it take all the column space
 
         this.add(majorPanel, gbc);
 
         this.pack();
         setVisible(true); // making frame vivible
 
-        // Here Comes ActionListeners
+        // Here Comes ActionListeners Portions
 
         // for clear button
         clearButton.addActionListener(new ActionListener() {
@@ -272,7 +327,7 @@ class MyFrame extends JFrame {
 
             }
         });
-
+        // for displaytutorbutton
         displayTutor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -313,49 +368,47 @@ class MyFrame extends JFrame {
                 String yearStr = yearOfExperienceTextField.getText();
 
                 try {
-                // Input validation
-                if (!isValidInput(teacherID, gradeStr, yearStr,department)) {
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please check your entries for ID, GradedScore,Department and YOE.");
-                    return;
-                }
-
-
-                int teacherId = Integer.parseInt(teacherID);
-                int gradedScore = Integer.parseInt(gradeStr);
-                int yearsOfExperience = Integer.parseInt(yearStr);
-
-                if(isNegative(teacherId,gradedScore,yearsOfExperience)){
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot be less than zero.");
-                    return;
-                }
-
-                // cheaking identity of lecturer to know if they exists already or not
-                Lecturer lecturer = findLecturer(teacherId);
-                if (lecturer != null) {
-                    // Calling grade assignment method from Lecturer class
-                    String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
-                    if (lecturer.gethasGraded()) {
+                    // Input validation
+                    if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
                         JOptionPane.showMessageDialog(null,
-                                "( " + result + " ) Assigned and Grade assignment successful for lecturer "
-                                        + teacherID);
-                        clearTextField();
-                    } else {
-                        JOptionPane.showMessageDialog(null, result);
+                                "Invalid input! Please check your entries for ID, GradedScore,Department and YOE.");
+                        return;
                     }
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Lecturer with ID " + teacherID + " not found.");
+                    int teacherId = Integer.parseInt(teacherID);
+                    int gradedScore = Integer.parseInt(gradeStr);
+                    int yearsOfExperience = Integer.parseInt(yearStr);
+
+                    if (isNegative(teacherId, gradedScore, yearsOfExperience)) {
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input! Input Field cannot be less than zero.");
+                        return;
+                    }
+
+                    // cheaking identity of lecturer to know if they exists already or not
+                    Lecturer lecturer = findLecturer(teacherId);
+                    if (lecturer != null) {
+                        // Calling grade assignment method from Lecturer class
+                        String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
+                        if (lecturer.gethasGraded()) {
+                            JOptionPane.showMessageDialog(null,
+                                    "( " + result + " ) Assigned and Grade assignment successful for lecturer "
+                                            + teacherID);
+                            clearTextField();
+                        } else {
+                            JOptionPane.showMessageDialog(null, result);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lecturer with ID " + teacherID + " not found.");
+                    }
+                } catch (NumberFormatException g) {
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Please fill input fields with their specific values only.");
+                } catch (Exception z) {
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Grade cannot be assigned.");
                 }
-            }catch(NumberFormatException g){
-                JOptionPane.showMessageDialog(null,
-                "Invalid input! Please fill input fields with their specific values only.");
-            }
-            catch(Exception z){
-                JOptionPane.showMessageDialog(null,
-                "Invalid input! Grade cannot be assigned.");
-            }
             }
         });
 
@@ -367,48 +420,47 @@ class MyFrame extends JFrame {
                 String salaryStr = salaryTextField.getText();
                 String performanceStr = performanceIndexTextField.getText();
 
+                try {
 
-                try{
-
-                if (!isValidInput(teacherID, salaryStr, performanceStr)) {
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please check your entries for ID, Salary and Performance Index.");
-                    return;
-                }
-
-                int teacherId = Integer.parseInt(teacherID);
-                int salary = Integer.parseInt(salaryStr);
-                int performanceIndex = Integer.parseInt(performanceStr);
-
-                if(isNegative(teacherId,salary,performanceIndex)){
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot be less than zero.");
-                    return;
-                }
-
-                // Finding tutor to know if they exists already or not
-                Tutor tutor = findTutor(teacherId);
-                if (tutor != null) {
-                    // Calling set salary method
-                    boolean isIncreased = tutor.setsalary(salary, performanceIndex);
-                    if (isIncreased == true) {
+                    if (!isValidInput(teacherID, salaryStr, performanceStr)) {
                         JOptionPane.showMessageDialog(null,
-                                "Salary and performance index updated for tutor " + teacherID);
-                        clearTextField();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
-
+                                "Invalid input! Please check your entries for ID, Salary and Performance Index.");
+                        return;
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
+
+                    int teacherId = Integer.parseInt(teacherID);
+                    int salary = Integer.parseInt(salaryStr);
+                    int performanceIndex = Integer.parseInt(performanceStr);
+
+                    if (isNegative(teacherId, salary, performanceIndex)) {
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input! Input Field cannot be less than zero.");
+                        return;
+                    }
+
+                    // Finding tutor to know if they exists already or not
+                    Tutor tutor = findTutor(teacherId);
+                    if (tutor != null) {
+                        // Calling set salary method
+                        boolean isIncreased = tutor.setsalary(salary, performanceIndex);
+                        if (isIncreased == true) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Salary and performance index updated for tutor " + teacherID);
+                            clearTextField();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
+
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
+                    }
+                } catch (NumberFormatException f) {
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Please fill input fields with their specific values only.");
+                } catch (Exception y) {
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! Salary was not set.");
                 }
-            }catch (NumberFormatException f){
-                JOptionPane.showMessageDialog(null,
-                "Invalid input! Please fill input fields with their specific values only.");
-            }catch(Exception y){
-                JOptionPane.showMessageDialog(null,
-                "Invalid input! Salary was not set.");
-            }
             }
         });
 
@@ -418,40 +470,41 @@ class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String teacherID = teacherIDTextField.getText();
 
-                try{
-                if (!isValidInput(teacherID)) {
-                    JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid teacher ID.");
-                    return;
-                }
+                try {
+                    if (!isValidInput(teacherID)) {
+                        JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid teacher ID.");
+                        return;
+                    }
 
-                int teacherId = Integer.parseInt(teacherID);
+                    int teacherId = Integer.parseInt(teacherID);
 
-                if(isNegative(teacherId)){
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot be less than zero.");
-                    return;
-                }
+                    if (isNegative(teacherId)) {
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input! Input Field cannot be less than zero.");
+                        return;
+                    }
 
-                Tutor tutor = (Tutor) findTutor(teacherId);
-                if (tutor != null) {
-                    teachers.remove(tutor); // Removing the tutor object
-                    JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " removed successfully.");
-                    clearTextField();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
-                }
-            }catch(NumberFormatException h){
+                    Tutor tutor = (Tutor) findTutor(teacherId);
+                    if (tutor != null) {
+                        teachers.remove(tutor); // Removing the tutor object
+                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " removed successfully.");
+                        clearTextField();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
+                    }
+                } catch (NumberFormatException h) {
                     JOptionPane.showMessageDialog(null,
-                    "Invalid input! Please fill input fields with their specific values only.");
-                }catch(Exception y){
+                            "Invalid input! Please fill input fields with their specific values only.");
+                } catch (Exception y) {
                     JOptionPane.showMessageDialog(null,
-                    "Invalid input! Tutor was not removed.");
+                            "Invalid input! Tutor was not removed.");
                 }
             }
         });
     }
 
-    // Here Comes Functions now (Greatest of All Time)GOAT
+    // Here Comes Functions (Greatest of All Time) of this program
+
     public Lecturer addLecturer() {
         String teacherID = teacherIDTextField.getText();
         String teacherName = teacherNameTextField.getText();
@@ -475,7 +528,7 @@ class MyFrame extends JFrame {
                 int workingHours = Integer.parseInt(workingHoursStr);
                 int yearOfExperience = Integer.parseInt(yearOfExperienceStr);
 
-                if(isNegative(teacherId,workingHours,yearOfExperience)){
+                if (isNegative(teacherId, workingHours, yearOfExperience)) {
                     JOptionPane.showMessageDialog(null,
                             "Invalid input! Input Field cannot be less than zero.");
                     return null;
@@ -496,9 +549,9 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Invalid input! Please fill input fields with their specific values only.");
             return null;
-        }catch(Exception y){
+        } catch (Exception y) {
             JOptionPane.showMessageDialog(null,
-            "Invalid input! Lecturer was not added.");
+                    "Invalid input! Lecturer was not added.");
             return null;
         }
         return null;
@@ -530,7 +583,7 @@ class MyFrame extends JFrame {
                 int salary = Integer.parseInt(salaryStr);
                 int performanceIndex = Integer.parseInt(performanceIndexStr);
 
-                if(isNegative(teacherId,workingHours,salary,performanceIndex)){
+                if (isNegative(teacherId, workingHours, salary, performanceIndex)) {
                     JOptionPane.showMessageDialog(null,
                             "Invalid input! Input Field cannot be less than zero.");
                     return null;
@@ -552,15 +605,14 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Invalid input! Please fill input fields with their specific values only.");
             return null;
-        }catch(Exception y){
+        } catch (Exception y) {
             JOptionPane.showMessageDialog(null,
-            "Invalid input! Tutor was not added .");
+                    "Invalid input! Tutor was not added .");
             return null;
         }
         return null;
     }
 
-   
     // for clearing all textFields
     public void clearTextField() {
         teacherIDTextField.setText("");
@@ -588,29 +640,31 @@ class MyFrame extends JFrame {
             }
         }
     }
-/* Using Variable Arguments
-    // for cheaking isValidMethod
-    private boolean isValidInput(String... inputs) {
-        for (String input : inputs) {
-            String a = input.trim();
-            if (a.equals("")) {
-                return false;
-            }
-        }
-        return true;
-    }
-    */
 
-    // Method OverLoading
+    // for checking Empty Field
+    /*
+     * Using Variable Arguments
+     * // for cheaking isValidMethod
+     * private boolean isValidInput(String... inputs) {
+     * for (String input : inputs) {
+     * String a = input.trim();
+     * if (a.equals("")) {
+     * return false;
+     * }
+     * }
+     * return true;
+     * }
+     */
 
-    private boolean isValidInput(String a)
-    {
-        if(a.equals("")){
+    // Using Method OverLoading
+
+    private boolean isValidInput(String a) {
+        if (a.equals("")) {
             return false;
         }
         return true;
     }
-    
+
     private boolean isValidInput(String a, String b, String c) {
         if ((a.equals("")) || (b.equals("")) || (c.equals(""))) {
             return false;
@@ -618,8 +672,8 @@ class MyFrame extends JFrame {
         return true;
     }
 
-    private boolean isValidInput(String a, String b, String c,String d) {
-        if ((a.equals("")) || (b.equals("")) || (c.equals(""))||(d.equals(""))) {
+    private boolean isValidInput(String a, String b, String c, String d) {
+        if ((a.equals("")) || (b.equals("")) || (c.equals("")) || (d.equals(""))) {
             return false;
         }
         return true;
@@ -642,33 +696,33 @@ class MyFrame extends JFrame {
         return true;
     }
 
+    // Cheak For Negative Ones using Method OverLoading
 
-    // Cheak For Negative Ones 
-
-    private boolean isNegative(int a)
-    {
-        if(a<0){
+    private boolean isNegative(int a) {
+        if (a < 0) {
             return true;
         }
         return false;
     }
 
-    private boolean isNegative(int a,int b,int c)
-    {
-        if((a<0)||(b<0)||(c<0)){
-            return true;
-        }
-        return false;
-    }
-    private boolean isNegative(int a,int b,int c,int d)
-    {
-        if((a<0)||(b<0)||(c<0)||(d<0)){
+    private boolean isNegative(int a, int b, int c) {
+        if ((a < 0) || (b < 0) || (c < 0)) {
             return true;
         }
         return false;
     }
 
+    private boolean isNegative(int a, int b, int c, int d) {
+        if ((a < 0) || (b < 0) || (c < 0) || (d < 0)) {
+            return true;
+        }
+        return false;
+    }
 
+    // cheking if lecturer with the same id already exists in the ArrayList or not
+    // will cheak every id and found it the right one
+
+    // for Lecturer
     private Lecturer findLecturer(int teacherId) {
         for (Teacher teacher : teachers) {
             if ((teacher instanceof Lecturer) && (teacher.getteacher_id() == teacherId)) {
@@ -678,7 +732,7 @@ class MyFrame extends JFrame {
         return null;
     }
 
-    // will cheak every id and found it the right one
+    // for Tutor
     private Tutor findTutor(int teacherId) {
 
         for (Teacher teacher : teachers) {
@@ -689,7 +743,7 @@ class MyFrame extends JFrame {
         return null;
     }
 
-    // For display method
+    // For displaying Lecturer List inn the Program
     public void displayLecturer() {
         int count = 0;
 
@@ -713,7 +767,7 @@ class MyFrame extends JFrame {
                     "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
                     "Working Hour", "Department", "Year Of Experience");
             System.out.println(
-                " " +  "-------------------------".repeat(7));
+                    " " + "-------------------------".repeat(7));
 
             for (Teacher teacher : teachers) {
                 if (teacher instanceof Lecturer) {
@@ -727,10 +781,11 @@ class MyFrame extends JFrame {
                 }
             }
             System.out.println(
-                " " + "-------------------------".repeat(7));
+                    " " + "-------------------------".repeat(7));
         }
     }
 
+    // For Displaying Tutor in The List
     public void displayTutor() {
 
         int count = 0;
@@ -778,7 +833,7 @@ class MyFrame extends JFrame {
     }
 }
 
-public class TeacherGUI_Final extends Teacher {
+public class TeacherGUI extends Teacher {
 
     public static void main(String[] args) {
 
