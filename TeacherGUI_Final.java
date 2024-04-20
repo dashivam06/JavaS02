@@ -819,7 +819,7 @@ class MyFrame extends JFrame {
             System.out.println("  ".repeat(40) + "Lecturers Deatils");
 
             System.out.println(" " + "-------------------------".repeat(7));
-            System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s  |\n",
+            System.out.printf("| %-3s | %-25s | %-22s | %-19s | %-22s | %-17s | %-22s | %-21s  |\n",
                     "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
                     "Working Hour", "Department", "Year Of Experience");
             System.out.println(
@@ -828,7 +828,7 @@ class MyFrame extends JFrame {
             for (Teacher teacher : teachers) {
                 if (teacher instanceof Lecturer) {
                     Lecturer lecturer = (Lecturer) teacher;
-                    System.out.printf("| %-5s | %-25s | %-22s | %-17s | %-22s | %-17s | %-22s | %-21s  |\n",
+                    System.out.printf("| %-3s | %-25s | %-22s | %-19s | %-22s | %-17s | %-22s | %-21s  |\n",
                             lecturer.getteacher_id(), lecturer.getname(), lecturer.getaddress(),
                             lecturer.getworking_type(), lecturer.getemployment_status(),
                             lecturer.getworking_hours(), lecturer.getdepartment(),
@@ -865,7 +865,7 @@ class MyFrame extends JFrame {
 
             System.out.println(
                     " " + "-------------------------".repeat(7));
-            System.out.printf("| %-5s | %-15s | %-18s | %-13s | %-17s | %-12s | %-12s | %-16s | %-20s | %-16s |\n",
+            System.out.printf("| %-3s | %-17s | %-18s | %-13s | %-17s | %-12s | %-10s | %-18s | %-22s | %-16s |\n",
                     "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
                     "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index");
             System.out.println(
@@ -876,7 +876,7 @@ class MyFrame extends JFrame {
                     Tutor tutor = (Tutor) teacher;
 
                     System.out.printf(
-                            "| %-5s | %-15s | %-18s | %-13s | %-17s | %-12s | %-12s | %-16s | %-22s | %-16s  |\n",
+                            "| %-3s | %-17s | %-18s | %-13s | %-17s | %-12s | %-10s | %-18s | %-22s | %-16s  |\n",
                             tutor.getteacher_id(), tutor.getname(), tutor.getaddress(),
                             tutor.getworking_type(), tutor.getemployment_status(),
                             tutor.getworking_hours(), tutor.getsalary(), tutor.getspecialization(),
