@@ -378,10 +378,10 @@ class MyFrame extends JFrame {
         gradeAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String teacherID = teacherIDTextField.getText();
-                String gradeStr = gradedScoreTextField.getText();
-                String department = departmentTextField.getText();
-                String yearStr = yearOfExperienceTextField.getText();
+                String teacherID = teacherIDTextField.getText().trim();
+                String gradeStr = gradedScoreTextField.getText().trim();
+                String department = departmentTextField.getText().trim();
+                String yearStr = yearOfExperienceTextField.getText().trim();
 
                 try {
                     // Input validation
@@ -432,9 +432,9 @@ class MyFrame extends JFrame {
         setSalaryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String teacherID = teacherIDTextField.getText();
-                String salaryStr = salaryTextField.getText();
-                String performanceStr = performanceIndexTextField.getText();
+                String teacherID = teacherIDTextField.getText().trim();
+                String salaryStr = salaryTextField.getText().trim();
+                String performanceStr = performanceIndexTextField.getText().trim();
 
                 try {
 
@@ -484,7 +484,7 @@ class MyFrame extends JFrame {
         removeTutorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String teacherID = teacherIDTextField.getText();
+                String teacherID = teacherIDTextField.getText().trim();
 
 
                 try {
@@ -538,14 +538,14 @@ class MyFrame extends JFrame {
 
 
     public Lecturer addLecturer() {
-        String teacherID = teacherIDTextField.getText();
-        String teacherName = teacherNameTextField.getText();
-        String address = addressTextField.getText();
+        String teacherID = teacherIDTextField.getText().trim();
+        String teacherName = teacherNameTextField.getText().trim();
+        String address = addressTextField.getText().trim();
         String workingType = workingTypeTextField.getText();
-        String employmentStatus = employmentStatusTextField.getText();
-        String workingHoursStr = workingHoursTextField.getText();
-        String department = departmentTextField.getText();
-        String yearOfExperienceStr = yearOfExperienceTextField.getText();
+        String employmentStatus = employmentStatusTextField.getText().trim();
+        String workingHoursStr = workingHoursTextField.getText().trim();
+        String department = departmentTextField.getText().trim();
+        String yearOfExperienceStr = yearOfExperienceTextField.getText().trim();
 
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, department,
                 yearOfExperienceStr)) {
@@ -594,16 +594,16 @@ class MyFrame extends JFrame {
 
     // new Tutor object
     private Tutor addTutor() {
-        String teacherID = teacherIDTextField.getText();
-        String teacherName = teacherNameTextField.getText();
-        String address = addressTextField.getText();
+        String teacherID = teacherIDTextField.getText().trim();
+        String teacherName = teacherNameTextField.getText().trim();
+        String address = addressTextField.getText().trim();
         String workingType = workingTypeTextField.getText();
-        String employmentStatus = employmentStatusTextField.getText();
-        String workingHoursStr = workingHoursTextField.getText();
-        String salaryStr = salaryTextField.getText();
-        String performanceIndexStr = performanceIndexTextField.getText();
-        String academyQualification = academyQualificationTextField.getText();
-        String specialization = specializationTextField.getText();
+        String employmentStatus = employmentStatusTextField.getText().trim();
+        String workingHoursStr = workingHoursTextField.getText().trim();
+        String salaryStr = salaryTextField.getText().trim();
+        String performanceIndexStr = performanceIndexTextField.getText().trim();
+        String academyQualification = academyQualificationTextField.getText().trim();
+        String specialization = specializationTextField.getText().trim();
 
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, salaryStr,
                 performanceIndexStr, academyQualification, specialization)) {
@@ -672,7 +672,7 @@ class MyFrame extends JFrame {
 
     // removingtutor
     public void removeTutor() {
-        int teacherId = Integer.parseInt(teacherIDTextField.getText());
+        int teacherId = Integer.parseInt(teacherIDTextField.getText().trim());
 
         for (Teacher i : teachers) {
             if (i.getteacher_id() == teacherId) {
