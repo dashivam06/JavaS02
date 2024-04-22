@@ -409,7 +409,7 @@ class MyFrame extends JFrame {
                         if (lecturer.gethasGraded()) {
                             JOptionPane.showMessageDialog(null,
                                     "( " + result + " ) Assigned and Grade assignment successful for lecturer "
-                                            + teacherID);
+                                            + teacherID+"\nTeacher ID : "+teacherId+"\nGraded Score : "+gradedScore+"\nDepartment : "+department+"\nYears of Experience : "+yearsOfExperience);
                             clearTextField();
                         } else {
                             JOptionPane.showMessageDialog(null, result);
@@ -461,7 +461,7 @@ class MyFrame extends JFrame {
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
                         if (isIncreased == true) {
                             JOptionPane.showMessageDialog(null,
-                                    "Salary and performance index updated for tutor " + teacherID);
+                                    "Salary and performance index updated for Tutor " + teacherID+"\nNew Salary : "+salary+"\nUpdated Performance Index : "+performanceIndex);
                             clearTextField();
                         } else {
                             JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
@@ -506,8 +506,9 @@ class MyFrame extends JFrame {
                         // Take Conformation From User to Remove the tutor
                         int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?", "Confirmation", JOptionPane.YES_NO_OPTION);
                             if(option == 0 ){  // if it yes then do following
-                        teachers.remove(tutor); // Removing the tutor object
-                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " removed successfully.");
+                                tutor.removetutor(); // Calling the function to set all of its instances to default
+                                teachers.remove(tutor); // Removing the tutor object from the arrayList
+                                JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " removed successfully.");
                         clearTextField();
                             }
                     } else {
