@@ -1,14 +1,17 @@
+
 // Importing Essentials 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.JTabbedPane;
 
 class MyFrame extends JFrame {
 
     // ArrayList Declaration to Store Lecturer and Tutors Of Teacher Class
-    ArrayList<Teacher> teachers = new ArrayList<>(); 
+    ArrayList<Teacher> teachers = new ArrayList<>();
 
     // decleration of every JLabel Elements used in program
     JLabel teacherIDLabel, teacherNameLabel, addressLabel, workingTypeLabel,
@@ -27,15 +30,13 @@ class MyFrame extends JFrame {
         setTitle("Teacher Database Portal ");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1600, 900);
-        setLocation(150, 20);
-
+        setLocation(130, 20);
 
         GridLayout gridLayout = new GridLayout(3, 4); // for entire frame
 
         // for positioning elements onto frame with points
         GridBagConstraints gbc = new GridBagConstraints();
         setLayout(gridLayout); // setting gridlayout to frame
-
 
         // For Teacher Input Fields **(Mandatory)
 
@@ -99,19 +100,18 @@ class MyFrame extends JFrame {
         JButton displayTutor = new JButton("Display Tutor Details");
         JButton displayLecturer = new JButton("Display Lecturer Details");
 
-        //clear Button
+        // clear Button
         JButton clearButton = new JButton("Clear All Input Fields");
 
         // Changing Fonts And Backgrounds
         clearButton.setFont(new Font("Consolas", Font.BOLD, 16));
-        clearButton.setForeground(new Color(60,90,111));
-        clearButton.setBackground(new Color(199,188,161));
+        clearButton.setForeground(new Color(60, 90, 111));
+        clearButton.setBackground(new Color(199, 188, 161));
         displayLecturer.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         displayLecturer.setBackground(new Color(232, 246, 239));
         displayTutor.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         displayTutor.setForeground(Color.BLACK);
         displayTutor.setBackground(new Color(232, 246, 239));
-
 
         // Will Contain Instructionn in 2nd Panel
         JPanel forNote = new JPanel(new GridLayout(10, 1));
@@ -167,7 +167,7 @@ class MyFrame extends JFrame {
 
         JPanel displayTeachersPanel = new JPanel(new GridLayout(1, 2)); // includes 2 button for displayig tutor and
                                                                         // lecturer
-                                             
+
         displayTeachersPanel.add(displayLecturer);
         displayTeachersPanel.add(displayTutor);
 
@@ -247,7 +247,6 @@ class MyFrame extends JFrame {
         academyQualificationLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
         specializationLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 
-
         // Initializing JTextFields
         salaryTextField = new JTextField(10);
         performanceIndexTextField = new JTextField(10);
@@ -264,8 +263,7 @@ class MyFrame extends JFrame {
         setSalaryButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         setSalaryButton.setBackground(new Color(170, 215, 217));
         removeTutorButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
-        removeTutorButton.setBackground(new Color(255,128,128));
-
+        removeTutorButton.setBackground(new Color(255, 128, 128));
 
         // tutorpanel panel for grouping the buttons,txtfield and labels
         JPanel tutorpanel = new JPanel(new GridLayout(4, 2, 50, 5));
@@ -303,27 +301,14 @@ class MyFrame extends JFrame {
         // Adding majorPanel to the frame
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth =4;   // let it take all the column space
+        gbc.gridwidth = 4; // let it take all the column space
 
         this.add(majorPanel, gbc);
 
         this.pack();
         setVisible(true); // making frame vivible
 
-
-
-
-
-
-
-
         // Here Comes ActionListeners Portions
-
-
-
-
-
-
 
         // for clear button
         clearButton.addActionListener(new ActionListener() {
@@ -348,6 +333,7 @@ class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                // displayTutor();
                 displayTutor();
 
             }
@@ -409,7 +395,9 @@ class MyFrame extends JFrame {
                         if (lecturer.gethasGraded()) {
                             JOptionPane.showMessageDialog(null,
                                     "( " + result + " ) Assigned and Grade assignment successful for lecturer "
-                                            + teacherID+"\nTeacher ID : "+teacherId+"\nGraded Score : "+gradedScore+"\nDepartment : "+department+"\nYears of Experience : "+yearsOfExperience);
+                                            + teacherID + "\nTeacher ID : " + teacherId + "\nGraded Score : "
+                                            + gradedScore + "\nDepartment : " + department + "\nYears of Experience : "
+                                            + yearsOfExperience);
                             clearTextField();
                         } else {
                             JOptionPane.showMessageDialog(null, result);
@@ -461,7 +449,8 @@ class MyFrame extends JFrame {
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
                         if (isIncreased == true) {
                             JOptionPane.showMessageDialog(null,
-                                    "Salary and performance index updated for Tutor " + teacherID+"\nNew Salary : "+salary+"\nUpdated Performance Index : "+performanceIndex);
+                                    "Salary and performance index updated for Tutor " + teacherID + "\nNew Salary : "
+                                            + salary + "\nUpdated Performance Index : " + performanceIndex);
                             clearTextField();
                         } else {
                             JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
@@ -486,7 +475,6 @@ class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String teacherID = teacherIDTextField.getText().trim();
 
-
                 try {
                     if (!isValidInput(teacherID)) {
                         JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid teacher ID.");
@@ -504,13 +492,15 @@ class MyFrame extends JFrame {
                     Tutor tutor = (Tutor) findTutor(teacherId);
                     if (tutor != null) {
                         // Take Conformation From User to Remove the tutor
-                        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                            if(option == 0 ){  // if it yes then do following
-                                tutor.removetutor(); // Calling the function to set all of its instances to default
-                                teachers.remove(tutor); // Removing the tutor object from the arrayList
-                                JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " removed successfully.");
-                        clearTextField();
-                            }
+                        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
+                                "Confirmation", JOptionPane.YES_NO_OPTION);
+                        if (option == 0) { // if it yes then do following
+                            tutor.removetutor(); // Calling the function to set all of its instances to default
+                            teachers.remove(tutor); // Removing the tutor object from the arrayList
+                            JOptionPane.showMessageDialog(null,
+                                    "Tutor with ID " + teacherID + " removed successfully.");
+                            clearTextField();
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
                     }
@@ -525,18 +515,7 @@ class MyFrame extends JFrame {
         });
     }
 
-
-
-
-
-
-
-
     // Here Comes Functions (Greatest of All Time) of this program
-
-
-
-
 
     public Lecturer addLecturer() {
         String teacherID = teacherIDTextField.getText().trim();
@@ -589,9 +568,6 @@ class MyFrame extends JFrame {
         }
         return null;
     }
-
-
-
 
     // new Tutor object
     private Tutor addTutor() {
@@ -649,8 +625,6 @@ class MyFrame extends JFrame {
         return null;
     }
 
-
-
     // for clearing all textFields
     public void clearTextField() {
         teacherIDTextField.setText("");
@@ -668,9 +642,6 @@ class MyFrame extends JFrame {
         specializationTextField.setText("");
     }
 
-
-
-
     // removingtutor
     public void removeTutor() {
         int teacherId = Integer.parseInt(teacherIDTextField.getText().trim());
@@ -682,9 +653,7 @@ class MyFrame extends JFrame {
         }
     }
 
-
-
-    // for checking Empty Field 
+    // for checking Empty Field
     /*
      * Using Variable Arguments
      * // for cheaking isValidMethod
@@ -698,7 +667,6 @@ class MyFrame extends JFrame {
      * return true;
      * }
      */
-
 
     // Using Method OverLoading
 
@@ -740,11 +708,6 @@ class MyFrame extends JFrame {
         return true;
     }
 
-
-
-
-
-
     // Cheak For Negative Ones using Method OverLoading
 
     private boolean isNegative(int a) {
@@ -768,13 +731,10 @@ class MyFrame extends JFrame {
         return false;
     }
 
-
-
-
     // cheking if lecturer with the same id already exists in the ArrayList or not
-     // will cheak every id and found it the right one
+    // will cheak every id and found it the right one
 
-     //for Lecturer
+    // for Lecturer
     private Lecturer findLecturer(int teacherId) {
         for (Teacher teacher : teachers) {
             if ((teacher instanceof Lecturer) && (teacher.getteacher_id() == teacherId)) {
@@ -784,7 +744,7 @@ class MyFrame extends JFrame {
         return null;
     }
 
-   // for Tutor
+    // for Tutor
     private Tutor findTutor(int teacherId) {
 
         for (Teacher teacher : teachers) {
@@ -794,11 +754,6 @@ class MyFrame extends JFrame {
         }
         return null;
     }
-
-
-
-
-
 
     // For displaying Lecturer List inn the Program
     public void displayLecturer() {
@@ -815,34 +770,54 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "There are currently no Lecturers to display.");
             return;
         } else {
-            System.out.println();
-
-            System.out.println("  ".repeat(40) + "Lecturers Deatils");
-
-            System.out.println(" " + "-------------------------".repeat(7));
-            System.out.printf("| %-3s | %-25s | %-22s | %-19s | %-22s | %-17s | %-22s | %-21s  |\n",
-                    "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
-                    "Working Hour", "Department", "Year Of Experience");
-            System.out.println(
-                    " " + "-------------------------".repeat(7));
-
+       
+            JFrame displayLecturerFrame = new JFrame("Lecturer Details");
+            displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            displayLecturerFrame.setSize(940, 280);
+            displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
+    
+            JPanel panel = new JPanel(new BorderLayout());
+            displayLecturerFrame.add(panel);
+    
+            String[] columnNames = { "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
+                    "Working Hour","Department", "Year Of Experience" };
+            String[][] rowData = new String[teachers.size()][columnNames.length];
+    
+            int rowIndex = 0;
             for (Teacher teacher : teachers) {
                 if (teacher instanceof Lecturer) {
                     Lecturer lecturer = (Lecturer) teacher;
-                    System.out.printf("| %-3s | %-25s | %-22s | %-19s | %-22s | %-17s | %-22s | %-21s  |\n",
-                            lecturer.getteacher_id(), lecturer.getname(), lecturer.getaddress(),
-                            lecturer.getworking_type(), lecturer.getemployment_status(),
-                            lecturer.getworking_hours(), lecturer.getdepartment(),
-                            lecturer.getyearOfExperience());
-
+                    rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
+                    rowData[rowIndex][1] = lecturer.getname();
+                    rowData[rowIndex][2] = lecturer.getaddress();
+                    rowData[rowIndex][3] = lecturer.getworking_type();
+                    rowData[rowIndex][4] = lecturer.getemployment_status();
+                    rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
+                    rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
+                    rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
+                    rowIndex++;
                 }
             }
-            System.out.println(
-                    " " + "-------------------------".repeat(7));
+    
+            JTable table = new JTable(rowData, columnNames);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+    
+            // Set preferred column widths for each column
+            table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
+            table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+            table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+            table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+            table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+            table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+            table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
+            table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
+    
+            JScrollPane scrollPane = new JScrollPane(table);
+            panel.add(scrollPane, BorderLayout.CENTER);
+    
+            displayLecturerFrame.setVisible(true);
         }
     }
-
-
 
     // For Displaying Tutor in The List
     public void displayTutor() {
@@ -860,36 +835,63 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "There are currently no Tutors to display.");
             return;
         } else {
-            System.out.println();
+            
+        JFrame displayTutorFrame = new JFrame("Tutor Details");
+        displayTutorFrame.setTitle("Tutor Details");
+        displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayTutorFrame.setSize(1135, 280);
+        // displayTutorFrame.setSize(500, 280);
+        displayTutorFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
-            System.out.println("  ".repeat(40) + "Tutor Deatils");
+        JPanel panel = new JPanel(new BorderLayout());
+        displayTutorFrame.add(panel);
 
-            System.out.println(
-                    " " + "-------------------------".repeat(7));
-            System.out.printf("| %-3s | %-17s | %-18s | %-13s | %-17s | %-12s | %-10s | %-18s | %-22s | %-16s |\n",
-                    "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
-                    "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index");
-            System.out.println(
-                    " " + "-------------------------".repeat(7));
+        String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
+                "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
+        String[][] rowData = new String[teachers.size()][columnNames.length];
 
-            for (Teacher teacher : teachers) {
-                if (teacher instanceof Tutor) {
-                    Tutor tutor = (Tutor) teacher;
-
-                    System.out.printf(
-                            "| %-3s | %-17s | %-18s | %-13s | %-17s | %-12s | %-10s | %-18s | %-22s | %-16s  |\n",
-                            tutor.getteacher_id(), tutor.getname(), tutor.getaddress(),
-                            tutor.getworking_type(), tutor.getemployment_status(),
-                            tutor.getworking_hours(), tutor.getsalary(), tutor.getspecialization(),
-                            tutor.getacademic_qualifications(), tutor.getperformance_index());
-
-                }
+        int rowIndex = 0;
+        for (Teacher teacher : teachers) {
+            if (teacher instanceof Tutor) {
+                Tutor tutor = (Tutor) teacher;
+                rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
+                rowData[rowIndex][1] = tutor.getname();
+                rowData[rowIndex][2] = tutor.getaddress();
+                rowData[rowIndex][3] = tutor.getworking_type();
+                rowData[rowIndex][4] = tutor.getemployment_status();
+                rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
+                rowData[rowIndex][6] = String.valueOf((int)tutor.getsalary());
+                rowData[rowIndex][7] = tutor.getspecialization();
+                rowData[rowIndex][8] = tutor.getacademic_qualifications();
+                rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
+                rowIndex++;
             }
-            System.out.println(
-                    " " + "-------------------------".repeat(7));
-
         }
+
+        JTable table = new JTable(rowData, columnNames);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+
+        // Set preferred column widths for each column
+        table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
+        table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+        table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+        table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+        table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+        table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+        table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
+        table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
+        table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
+        table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        displayTutorFrame.setVisible(true);
     }
+
+    }
+
+  
 }
 
 public class TeacherGUI_Final extends Teacher {
