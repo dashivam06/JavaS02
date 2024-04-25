@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import javax.swing.JTabbedPane;
 
 class MyFrame extends JFrame {
 
@@ -770,19 +769,19 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "There are currently no Lecturers to display.");
             return;
         } else {
-       
+
             JFrame displayLecturerFrame = new JFrame("Lecturer Details");
             displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             displayLecturerFrame.setSize(940, 280);
             displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
-    
+
             JPanel panel = new JPanel(new BorderLayout());
             displayLecturerFrame.add(panel);
-    
+
             String[] columnNames = { "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
-                    "Working Hour","Department", "Year Of Experience" };
+                    "Working Hour", "Department", "Year Of Experience" };
             String[][] rowData = new String[teachers.size()][columnNames.length];
-    
+
             int rowIndex = 0;
             for (Teacher teacher : teachers) {
                 if (teacher instanceof Lecturer) {
@@ -798,10 +797,10 @@ class MyFrame extends JFrame {
                     rowIndex++;
                 }
             }
-    
+
             JTable table = new JTable(rowData, columnNames);
             table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
-    
+
             // Set preferred column widths for each column
             table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
             table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
@@ -811,10 +810,10 @@ class MyFrame extends JFrame {
             table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
             table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
             table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
-    
+
             JScrollPane scrollPane = new JScrollPane(table);
             panel.add(scrollPane, BorderLayout.CENTER);
-    
+
             displayLecturerFrame.setVisible(true);
         }
     }
@@ -835,63 +834,62 @@ class MyFrame extends JFrame {
             JOptionPane.showMessageDialog(null, "There are currently no Tutors to display.");
             return;
         } else {
-            
-        JFrame displayTutorFrame = new JFrame("Tutor Details");
-        displayTutorFrame.setTitle("Tutor Details");
-        displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        displayTutorFrame.setSize(1135, 280);
-        // displayTutorFrame.setSize(500, 280);
-        displayTutorFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
-        JPanel panel = new JPanel(new BorderLayout());
-        displayTutorFrame.add(panel);
+            JFrame displayTutorFrame = new JFrame("Tutor Details");
+            displayTutorFrame.setTitle("Tutor Details");
+            displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            displayTutorFrame.setSize(1135, 280);
+            // displayTutorFrame.setSize(500, 280);
+            displayTutorFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
-        String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
-                "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
-        String[][] rowData = new String[teachers.size()][columnNames.length];
+            JPanel panel = new JPanel(new BorderLayout());
+            displayTutorFrame.add(panel);
 
-        int rowIndex = 0;
-        for (Teacher teacher : teachers) {
-            if (teacher instanceof Tutor) {
-                Tutor tutor = (Tutor) teacher;
-                rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
-                rowData[rowIndex][1] = tutor.getname();
-                rowData[rowIndex][2] = tutor.getaddress();
-                rowData[rowIndex][3] = tutor.getworking_type();
-                rowData[rowIndex][4] = tutor.getemployment_status();
-                rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
-                rowData[rowIndex][6] = String.valueOf((int)tutor.getsalary());
-                rowData[rowIndex][7] = tutor.getspecialization();
-                rowData[rowIndex][8] = tutor.getacademic_qualifications();
-                rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
-                rowIndex++;
+            String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
+                    "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
+            String[][] rowData = new String[teachers.size()][columnNames.length];
+
+            int rowIndex = 0;
+            for (Teacher teacher : teachers) {
+                if (teacher instanceof Tutor) {
+                    Tutor tutor = (Tutor) teacher;
+                    rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
+                    rowData[rowIndex][1] = tutor.getname();
+                    rowData[rowIndex][2] = tutor.getaddress();
+                    rowData[rowIndex][3] = tutor.getworking_type();
+                    rowData[rowIndex][4] = tutor.getemployment_status();
+                    rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
+                    rowData[rowIndex][6] = String.valueOf((int) tutor.getsalary());
+                    rowData[rowIndex][7] = tutor.getspecialization();
+                    rowData[rowIndex][8] = tutor.getacademic_qualifications();
+                    rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
+                    rowIndex++;
+                }
             }
+
+            JTable table = new JTable(rowData, columnNames);
+            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+
+            // Set preferred column widths for each column
+            table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
+            table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+            table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+            table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+            table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+            table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+            table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
+            table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
+            table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
+            table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            panel.add(scrollPane, BorderLayout.CENTER);
+
+            displayTutorFrame.setVisible(true);
         }
 
-        JTable table = new JTable(rowData, columnNames);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
-
-        // Set preferred column widths for each column
-        table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
-        table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
-        table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
-        table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
-        table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
-        table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
-        table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
-        table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
-        table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
-        table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        displayTutorFrame.setVisible(true);
     }
 
-    }
-
-  
 }
 
 public class TeacherGUI_Final extends Teacher {
