@@ -345,8 +345,9 @@ class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Teacher teacher1 = addLecturer();
-                teachers.add(teacher1);
-
+                if (teacher1 != null) {
+                    teachers.add(teacher1);
+                }
             }
         });
 
@@ -355,7 +356,9 @@ class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Teacher teacher2 = addTutor();
-                teachers.add(teacher2);
+                if (teacher2 != null) {
+                    teachers.add(teacher2);
+                }
             }
         });
 
@@ -448,7 +451,8 @@ class MyFrame extends JFrame {
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
                         if (isIncreased == true) {
                             JOptionPane.showMessageDialog(null,
-                                    "Salary and performance index updated for Tutor " + teacherID + "\nNew Salary : "
+                                    "Salary and performance index updated for Tutor ID : " + teacherID
+                                            + "\nNew Salary : "
                                             + salary + "\nUpdated Performance Index : " + performanceIndex);
                             clearTextField();
                         } else {
@@ -508,7 +512,7 @@ class MyFrame extends JFrame {
                             "Invalid input! Please fill input fields with their specific values only.");
                 } catch (Exception y) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Tutor was not removed.");
+                            "Invalid input! Tutor was not removed." + y);
                 }
             }
         });
@@ -533,7 +537,7 @@ class MyFrame extends JFrame {
         }
 
         try {
-            if (findLecturer(Integer.parseInt(teacherID)) == null) {
+            if (findTeacher(Integer.parseInt(teacherID)) == null) {
 
                 int teacherId = Integer.parseInt(teacherID);
                 int workingHours = Integer.parseInt(workingHoursStr);
@@ -565,6 +569,7 @@ class MyFrame extends JFrame {
                     "Invalid input! Lecturer was not added.");
             return null;
         }
+
         return null;
     }
 
@@ -587,7 +592,7 @@ class MyFrame extends JFrame {
             return null;
         }
         try {
-            if (findTutor(Integer.parseInt(teacherID)) == null) {
+            if (findTeacher(Integer.parseInt(teacherID)) == null) {
 
                 int teacherId = Integer.parseInt(teacherID);
                 int workingHours = Integer.parseInt(workingHoursStr);
@@ -610,7 +615,7 @@ class MyFrame extends JFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Teacher with ID : " + Integer.parseInt(teacherID) + "already exists.");
+                        "Teacher with ID : " + Integer.parseInt(teacherID) + " already exists.");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
@@ -730,8 +735,18 @@ class MyFrame extends JFrame {
         return false;
     }
 
-    // cheking if lecturer with the same id already exists in the ArrayList or not
+    // cheking if teacher with the same id already exists in the ArrayList or not
     // will cheak every id and found it the right one
+
+    // for Teacher as a whole
+    private Teacher findTeacher(int teacherId) {
+        for (Teacher teacher : teachers) {
+            if ((teacher instanceof Teacher) && (teacher.getteacher_id() == teacherId)) {
+                return teacher;
+            }
+        }
+        return null;
+    }
 
     // for Lecturer
     private Lecturer findLecturer(int teacherId) {
