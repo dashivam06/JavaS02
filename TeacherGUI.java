@@ -388,6 +388,10 @@ class MyFrame extends JFrame {
                                 "Invalid input! Input Field cannot have Negative Values");
                         return;
                     }
+                    if(containsNumbers(department)){
+                        JOptionPane.showMessageDialog(null,"Invalid input! \nNumeric values are not allowed in the department field. \nPlease correct your input.");
+                        return ;
+                    }
 
                     // cheaking identity of lecturer to know if they exists already or not
                     Lecturer lecturer = findLecturer(teacherId);
@@ -421,6 +425,7 @@ class MyFrame extends JFrame {
         // for setsalarybutton
         setSalaryButton.addActionListener(new ActionListener() {
             @Override
+            //---------------------------- Adding Action Listener to buttons -----------------------------//
             public void actionPerformed(ActionEvent e) {
                 String teacherID = teacherIDTextField.getText().trim();
                 String salaryStr = salaryTextField.getText().trim();
@@ -548,11 +553,16 @@ class MyFrame extends JFrame {
                             "Invalid input! Input Field cannot have Negative Values");
                     return null;
                 }
+
+                if((containsNumbers(department))||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
+                    JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nand employment status fields. \nPlease correct your input.");
+                    return null;
+                }
                 // new Lecturer object
                 Lecturer lecturer = new Lecturer(teacherId, teacherName, address, workingType, employmentStatus,
                         workingHours, department, yearOfExperience);
 
-                JOptionPane.showMessageDialog(null, "Lecturer added successfully!");
+                JOptionPane.showMessageDialog(null, "Lecturer added successfully.");
                 clearTextField();
                 return lecturer;
 
@@ -604,6 +614,10 @@ class MyFrame extends JFrame {
                             "Invalid input! Input Field cannot have Negative Values");
                     return null;
                 }
+                if((containsNumbers(specialization))||containsNumbers(academyQualification)||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
+                    JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nemployment status, specialization and academic qualificationfields. \nPlease correct your input.");
+                    return null;
+                }
 
                 // new Tutor object
                 Tutor tutor = new Tutor(teacherId, teacherName, address, workingType, employmentStatus, workingHours,
@@ -646,6 +660,16 @@ class MyFrame extends JFrame {
         specializationTextField.setText("");
     }
 
+
+    public static boolean containsNumbers(String value) {
+        for (int i = 0; i < value.length(); i++) {
+            char character = value.charAt(i);
+            if (Character.isDigit(character)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // for checking Empty Field
     /*
@@ -844,7 +868,6 @@ class MyFrame extends JFrame {
             displayTutorFrame.setTitle("Tutor Details");
             displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             displayTutorFrame.setSize(1135, 280);
-            // displayTutorFrame.setSize(500, 280);
             displayTutorFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
             JPanel panel = new JPanel(new BorderLayout());
