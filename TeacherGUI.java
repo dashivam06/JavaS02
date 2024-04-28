@@ -385,7 +385,7 @@ class MyFrame extends JFrame {
 
                     if (isNegative(teacherId, gradedScore, yearsOfExperience)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot be less than zero.");
+                                "Invalid input! Input Field cannot have Negative Values");
                         return;
                     }
 
@@ -440,7 +440,7 @@ class MyFrame extends JFrame {
 
                     if (isNegative(teacherId, salary, performanceIndex)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot be less than zero.");
+                                "Invalid input! Input Field cannot have Negative Values");
                         return;
                     }
 
@@ -488,7 +488,7 @@ class MyFrame extends JFrame {
 
                     if (isNegative(teacherId)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot be less than zero.");
+                                "Invalid input! Input Field cannot have Negative Values");
                         return;
                     }
 
@@ -530,13 +530,13 @@ class MyFrame extends JFrame {
         String department = departmentTextField.getText().trim();
         String yearOfExperienceStr = yearOfExperienceTextField.getText().trim();
 
+        try{
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, department,
                 yearOfExperienceStr)) {
             JOptionPane.showMessageDialog(null, "Invalid input! Please check for missing input fields.");
             return null;
         }
 
-        try {
             if (findTeacher(Integer.parseInt(teacherID)) == null) {
 
                 int teacherId = Integer.parseInt(teacherID);
@@ -545,7 +545,7 @@ class MyFrame extends JFrame {
 
                 if (isNegative(teacherId, workingHours, yearOfExperience)) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot be less than zero.");
+                            "Invalid input! Input Field cannot have Negative Values");
                     return null;
                 }
                 // new Lecturer object
@@ -560,17 +560,17 @@ class MyFrame extends JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Teacher with ID : " + Integer.parseInt(teacherID) + " already exists.");
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Invalid input! Please fill input fields with their specific values only.");
-            return null;
-        } catch (Exception y) {
-            JOptionPane.showMessageDialog(null,
-                    "Invalid input! Lecturer was not added.");
-            return null;
-        }
-
+        
         return null;
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null,
+                "Invalid input! Please fill input fields with their specific values only.");
+        return null;
+    } catch (Exception y) {
+        JOptionPane.showMessageDialog(null,
+                "Invalid input! Tutor was not added .");
+        return null;
+    }
     }
 
     // new Tutor object
@@ -601,7 +601,7 @@ class MyFrame extends JFrame {
 
                 if (isNegative(teacherId, workingHours, salary, performanceIndex)) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot be less than zero.");
+                            "Invalid input! Input Field cannot have Negative Values");
                     return null;
                 }
 
@@ -646,16 +646,6 @@ class MyFrame extends JFrame {
         specializationTextField.setText("");
     }
 
-    // removingtutor
-    public void removeTutor() {
-        int teacherId = Integer.parseInt(teacherIDTextField.getText().trim());
-
-        for (Teacher i : teachers) {
-            if (i.getteacher_id() == teacherId) {
-                teachers.remove(i);
-            }
-        }
-    }
 
     // for checking Empty Field
     /*
@@ -907,7 +897,7 @@ class MyFrame extends JFrame {
 
 }
 
-public class TeacherGUI_Final extends Teacher {
+public class TeacherGUI extends Teacher {
 
     public static void main(String[] args) {
 
