@@ -438,7 +438,8 @@ class MyFrame extends JFrame {
                     // Input validation
                     if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nPlease check your entries for ID, GradedScore,Department and YOE.");
+                                "Invalid input!! \nPlease check your entries for Teacher ID, GradedScore, \nDepartment and Year of Experience.\n\n"+
+                                "Note : See instructions for help." );
                         return;
                     }
 
@@ -482,7 +483,11 @@ class MyFrame extends JFrame {
                 } catch (NumberFormatException g) {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for :\n"+
+                            "1) Teacher ID \n"
+                            +"2) Graded Score \n"
+                            +"3) Year Of Experience \n"
+                           );
                 } catch (Exception z) {
                     // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
@@ -518,7 +523,8 @@ class MyFrame extends JFrame {
                     if (!isValidInput(teacherID, salaryStr, performanceStr)) {
                         // if the input field is empty string showing suitable message in information dialog
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nPlease check your entries for ID, Salary and Performance Index.");
+                                "Invalid input!! \nPlease check your entries for Teacher ID,\nSalary and Performance Index.\n\n"+
+                                "Note : See instructions for help." );
                         return;
                     }
 
@@ -558,7 +564,10 @@ class MyFrame extends JFrame {
                 } catch (NumberFormatException f) {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for  "+                             
+                             "1) Teacher ID \n"
+                            +"2) Salary \n"
+                            +"3) Perforamnce Index");
                 } catch (Exception y) {
                     // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
@@ -588,7 +597,8 @@ class MyFrame extends JFrame {
                 try {
                     // check if teacher ID input is empty string or not
                     if (!isValidInput(teacherID)) {
-                        JOptionPane.showMessageDialog(null, "Invalid input!! \nPlease enter a valid numeric value for the teacher ID.");
+                        JOptionPane.showMessageDialog(null, "Invalid input!! \nPlease enter a valid numeric value for the teacher ID.\n\n"+
+                        "Note : See instructions for help." );
                         return;
                     }
                     // Parsing teacher ID to integer
@@ -621,7 +631,7 @@ class MyFrame extends JFrame {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
                             "Oops! It seems you've entered invalid input. "+
-                                "\nPlease provide valid numerical values for numeric fields.");
+                                "\nPlease provide valid numerical values for : \n1) Teacher ID");
                 } catch (Exception y) {
                     // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
@@ -677,8 +687,9 @@ class MyFrame extends JFrame {
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, department,
                 yearOfExperienceStr)) {
             JOptionPane.showMessageDialog(null, 
-                    "Oops! It looks like some fields are empty or contain invalid data. "+
-                            "\nPlease fill in all required fields with accurate information.");
+                    "Oops! It looks like some fields are empty or contain invalid data.\n"+
+                    "Before proceeding, please ensure all required fields are filled properly.\n\n"+
+                    "Note : See instructions for help." );
             return null;
         }
 
@@ -721,7 +732,10 @@ class MyFrame extends JFrame {
     } catch (NumberFormatException e) {
             // Display error message for invalid numerical input
         JOptionPane.showMessageDialog(null,
-                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for \n"+
+                "1) Teacher ID \n"
+                +"2) Working Hours \n"
+                +"3) Year of Experience");
         return null;
     } catch (Exception y) {
             // Displaying a standard error message for other exceptions
@@ -762,7 +776,8 @@ class MyFrame extends JFrame {
             // Displaying error message for invalid or empty fields
             JOptionPane.showMessageDialog(null, 
                         "Oops! It looks like some fields are empty or contain invalid data. "
-                            +"\nPlease fill in all required fields with accurate information.");
+                            +"\nPlease fill in all required fields with accurate information.\n\n"+
+                            "Note : See instructions for help." );
             return null;
         }
         try {
@@ -812,7 +827,11 @@ class MyFrame extends JFrame {
                 // Displaying error message for invalid numerical input
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for :\n"+
+                "1) Teacher ID \n"
+                +"2) Working Hours \n"
+                +"3) Salary \n"
+                +"4) Perforamnce Index");
             return null;
                  // Displaying a standard error message for other exceptions
         } catch (Exception y) {
