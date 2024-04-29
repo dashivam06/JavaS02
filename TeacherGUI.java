@@ -1,5 +1,5 @@
 
-// Importing Essentials 
+// Importing Essentials for GUI 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 
 class MyFrame extends JFrame {
+
+
+
 
     // ArrayList Declaration to Store Lecturer and Tutors Of Teacher Class
     ArrayList<Teacher> teachers = new ArrayList<>();
@@ -25,17 +28,24 @@ class MyFrame extends JFrame {
             salaryTextField, performanceIndexTextField, academyQualificationTextField,
             specializationTextField;
 
-    MyFrame() { // constructor
-        setTitle("Teacher Database Portal ");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1600, 900);
-        setLocation(130, 20);
 
-        GridLayout gridLayout = new GridLayout(3, 4); // for entire frame
+
+
+
+
+    MyFrame() { // constructor
+        // setting up the JFrame 
+        setTitle("Teacher Database Portal ");       // for frame title
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   // for frame close button behaviour
+        setSize(1600, 900);     // for frame size
+        setLocation(130, 20);            // frame location on the screen
+
+        GridLayout gridLayout = new GridLayout(3, 4);
 
         // for positioning elements onto frame with points
         GridBagConstraints gbc = new GridBagConstraints();
-        setLayout(gridLayout); // setting gridlayout to frame
+        // Grid layout for main frame
+        setLayout(gridLayout); 
 
         // For Teacher Input Fields **(Mandatory)
 
@@ -62,7 +72,7 @@ class MyFrame extends JFrame {
         employmentStatusTextField = new JTextField(10);
         workingHoursTextField = new JTextField(10);
 
-        // Created panel and set gridlayout (3 rows, 2 columns)
+        // will store mandatory teacher fields 
         JPanel teacherPanel = new JPanel();
         GridLayout g = new GridLayout(3, 2, 50, 5);
         teacherPanel.setLayout(g);
@@ -84,25 +94,35 @@ class MyFrame extends JFrame {
         teacherPanel.add(workingHoursLabel);
         teacherPanel.add(workingHoursTextField);
 
-        // Adding the panel to the frame and positioning it.
+        // Adding the panel to the frame and positioning it. (  1st Row   )
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 4;
         this.add(teacherPanel, gbc);
 
-        // Creating panel for 2nd row to include instructions,displaytutor and
 
-        // For Clear and Display Button
 
-        // displayLecturer
+
+
+
+
+
+
+
+
+
+
+        // Creating panel for 2nd row to include instructions,displaytutor and displaylecturer button and clear field
         JPanel teacherButtonPanel = new JPanel(new BorderLayout());
+
+        // Buttons For Displaying lecturer and tutor details 
         JButton displayTutor = new JButton("Display Tutor Details");
         JButton displayLecturer = new JButton("Display Lecturer Details");
 
         // clear Button
         JButton clearButton = new JButton("Clear All Input Fields");
 
-        // Changing Fonts And Backgrounds
+        // Changing Fonts And Backgrounds of buttons 
         clearButton.setFont(new Font("Consolas", Font.BOLD, 16));
         clearButton.setForeground(new Color(60, 90, 111));
         clearButton.setBackground(new Color(199, 188, 161));
@@ -112,10 +132,10 @@ class MyFrame extends JFrame {
         displayTutor.setForeground(Color.BLACK);
         displayTutor.setBackground(new Color(232, 246, 239));
 
-        // Will Contain Instructionn in 2nd Panel
+        // Will Contain different Instruction in the form of JLabels 
         JPanel forNote = new JPanel(new GridLayout(10, 1));
 
-        // Instructions to be followed
+        // Instructions to be followed and will be added to forNote panel 
         JLabel note = new JLabel(" Instructions : ");
         JLabel instruction1 = new JLabel(
                 "     1)   Please fill all the required input fields with valid values only .");
@@ -164,8 +184,10 @@ class MyFrame extends JFrame {
 
         forNote.add(instruction7);
 
-        JPanel displayTeachersPanel = new JPanel(new GridLayout(1, 2)); // includes 2 button for displayig tutor and
-                                                                        // lecturer
+
+        // will includes 2 button for displayig tutor and lecturer
+        JPanel displayTeachersPanel = new JPanel(new GridLayout(1, 2)); 
+                                                                        
 
         displayTeachersPanel.add(displayLecturer);
         displayTeachersPanel.add(displayTutor);
@@ -173,14 +195,25 @@ class MyFrame extends JFrame {
         // Adding buttons to the panel
         teacherButtonPanel.add(clearButton, BorderLayout.NORTH);
         teacherButtonPanel.add(displayTeachersPanel, BorderLayout.SOUTH);
+
+        // adding instructions onto the panel
         teacherButtonPanel.add(forNote, BorderLayout.CENTER);
 
-        // Adding the panel to the frame
+        // Adding the panel to the frame    ( 2nd Row )
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 4;
 
         this.add(teacherButtonPanel);
+
+
+
+
+
+
+
+
+
 
         // For Lecturer Panel
 
@@ -219,19 +252,18 @@ class MyFrame extends JFrame {
         // gap around all elements
         lecturerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        // Create button panel with GridLayout
+        // Creating panel to add add lecturer and gradeassignment button 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 3, 5, 5));
         buttonPanel.add(addLecturerButton);
         buttonPanel.add(gradeAssignmentButton);
 
-        // Main panel with BorderLayout to group button and txtfield of lecturer
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(lecturerPanel, BorderLayout.CENTER);
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        // Main panel to group button and txtfield of lecturer
+        JPanel mainLecturerPanel = new JPanel();
+        mainLecturerPanel.setLayout(new BorderLayout());
+        mainLecturerPanel.add(lecturerPanel, BorderLayout.CENTER);
+        mainLecturerPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Set frame size
-        this.pack();
+     
 
         // Adding Tutor Class
 
@@ -257,6 +289,7 @@ class MyFrame extends JFrame {
         JButton removeTutorButton = new JButton("Remove Tutor");
         JButton setSalaryButton = new JButton("Set Salary");
 
+        // setting fonts and background of the buttons
         addTutorButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
         addTutorButton.setBackground(new Color(176, 197, 164));
         setSalaryButton.setFont(new Font("Trebuchet MS", Font.BOLD, 15));
@@ -286,7 +319,7 @@ class MyFrame extends JFrame {
         tutorbuttonPanel.add(removeTutorButton);
         tutorbuttonPanel.add(setSalaryButton);
 
-        // mainTutorPanel i.e consists of buttons and txtfields
+        // mainTutorPanel i.e consists of buttons and txtfields 
         JPanel mainTutorPanel = new JPanel();
         mainTutorPanel.setLayout(new BorderLayout());
         mainTutorPanel.add(tutorpanel, BorderLayout.CENTER);
@@ -294,20 +327,38 @@ class MyFrame extends JFrame {
 
         // comprises of both lecturer and tutor
         JPanel majorPanel = new JPanel(new GridLayout(1, 2, 50, 20));
-        majorPanel.add(mainPanel);
+        majorPanel.add(mainLecturerPanel);
         majorPanel.add(mainTutorPanel);
 
-        // Adding majorPanel to the frame
+        // Adding majorPanel to the frame(  3rd Row   )
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 4; // let it take all the column space
 
-        this.add(majorPanel, gbc);
+        this.add(majorPanel, gbc);      
 
-        this.pack();
-        setVisible(true); // making frame vivible
+        this.pack();    // will help consume extra spacig on the frame 
 
-        // Here Comes ActionListeners Portions
+        // changing the default visibility of frame & making frame visible
+        setVisible(true); 
+
+
+
+
+
+
+
+/*
+
+                <<<  ---------  -----------   -----------   ----------     Action Listeners Portions  ---------  -----------   -----------  ----------    >>>
+
+ */ 
+
+
+
+
+
+
 
         // for clear button
         clearButton.addActionListener(new ActionListener() {
@@ -360,12 +411,22 @@ class MyFrame extends JFrame {
                     teachers.add(teacher2);
                 }
             }
+
         });
 
-        // for gradeassignmentbutton
-        gradeAssignmentButton.addActionListener(new ActionListener() {
+
+
+
+/**
+ * ActionListener for the gradeAssignmentButton.
+ * Assigns a grade to a Lecturer based on the provided teacher ID, graded score, department, and years of experience.
+ */
+
+
+ gradeAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Retrieve input values from text fields and trim leading/trailing whitespace
                 String teacherID = teacherIDTextField.getText().trim();
                 String gradeStr = gradedScoreTextField.getText().trim();
                 String department = departmentTextField.getText().trim();
@@ -375,7 +436,7 @@ class MyFrame extends JFrame {
                     // Input validation
                     if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Please check your entries for ID, GradedScore,Department and YOE.");
+                                "Invalid input!! \nPlease check your entries for ID, GradedScore,Department and YOE.");
                         return;
                     }
 
@@ -383,11 +444,13 @@ class MyFrame extends JFrame {
                     int gradedScore = Integer.parseInt(gradeStr);
                     int yearsOfExperience = Integer.parseInt(yearStr);
 
+                    // Checking for negative values
                     if (isNegative(teacherId, gradedScore, yearsOfExperience)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot have Negative Values");
+                                "Invalid input!! \nInput Field cannot have negative values.\n");
                         return;
                     }
+                    // Check for numeric values in the department field
                     if(containsNumbers(department)){
                         JOptionPane.showMessageDialog(null,"Invalid input! \nNumeric values are not allowed in the department field. \nPlease correct your input.");
                         return ;
@@ -395,7 +458,7 @@ class MyFrame extends JFrame {
 
                     // cheaking identity of lecturer to know if they exists already or not
                     Lecturer lecturer = findLecturer(teacherId);
-                    if (lecturer != null) {
+                    if (lecturer != null) { // if lecturer exists then 
                         // Calling grade assignment method from Lecturer class
                         String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
                         if (lecturer.gethasGraded()) {
@@ -404,7 +467,7 @@ class MyFrame extends JFrame {
                                             + teacherID + "\nTeacher ID : " + teacherId + "\nGraded Score : "
                                             + gradedScore + "\nDepartment : " + department + "\nYears of Experience : "
                                             + yearsOfExperience);
-                            clearTextField();
+                            clearTextField();   // clearing textfield after gradingAssignment
                         } else {
                             JOptionPane.showMessageDialog(null, result);
                         }
@@ -413,54 +476,75 @@ class MyFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "Lecturer with ID " + teacherID + " not found.");
                     }
                 } catch (NumberFormatException g) {
+                    // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please fill input fields with their specific values only.");
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
                 } catch (Exception z) {
+                    // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Grade cannot be assigned.");
+                            "Invalid input! \nGrade cannot be assigned.");
                 }
             }
         });
 
-        // for setsalarybutton
-        setSalaryButton.addActionListener(new ActionListener() {
+
+
+
+
+
+
+/**
+ * ActionListener for the setSalaryButton.
+ * Sets the salary and performance index for a Tutor based on the provided teacher ID.
+ */  
+
+
+
+ setSalaryButton.addActionListener(new ActionListener() {
             @Override
-            //---------------------------- Adding Action Listener to buttons -----------------------------//
-            public void actionPerformed(ActionEvent e) {
+
+            public void actionPerformed(ActionEvent e) {        
+                // Retrieve input values from text fields and trim leading/trailing whitespace
                 String teacherID = teacherIDTextField.getText().trim();
                 String salaryStr = salaryTextField.getText().trim();
                 String performanceStr = performanceIndexTextField.getText().trim();
 
                 try {
-
+                    // check if teacher ID, salary or performanceindex input is empty string or not
                     if (!isValidInput(teacherID, salaryStr, performanceStr)) {
+                        // if the input field is empty string showing suitable message in information dialdog
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Please check your entries for ID, Salary and Performance Index.");
+                                "Invalid input!! \nPlease check your entries for ID, Salary and Performance Index.");
                         return;
                     }
 
+                    // Parsing input strings to integers
                     int teacherId = Integer.parseInt(teacherID);
                     int salary = Integer.parseInt(salaryStr);
                     int performanceIndex = Integer.parseInt(performanceStr);
 
+                    // Checking for negative values
                     if (isNegative(teacherId, salary, performanceIndex)) {
+                         // if the input field is a negative value showing suitable message in information dialdog
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot have Negative Values");
+                                "Invalid input!! \nInput Field cannot have negative values.\n");
                         return;
                     }
 
                     // Finding tutor to know if they exists already or not
                     Tutor tutor = findTutor(teacherId);
                     if (tutor != null) {
-                        // Calling set salary method
+                        // Calling set salary method and storing the returned boolean value onto a variable 
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
+                        // if salary was set then show new salary and performance index in a dialog box 
                         if (isIncreased == true) {
                             JOptionPane.showMessageDialog(null,
                                     "Salary and performance index updated for Tutor ID : " + teacherID
                                             + "\nNew Salary : "
                                             + salary + "\nUpdated Performance Index : " + performanceIndex);
-                            clearTextField();
+                            clearTextField();       // clearing textfields after setting salary 
                         } else {
+                            // if salary was not set then displaying suitable information dialog
                             JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
 
                         }
@@ -468,38 +552,55 @@ class MyFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
                     }
                 } catch (NumberFormatException f) {
+                    // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please fill input fields with their specific values only.");
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
                 } catch (Exception y) {
+                    // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
                             "Invalid input! Salary was not set.");
                 }
             }
         });
 
-        // for removetutorbutton
+
+
+
+
+
+
+
+
+/**
+ * ActionListener for the removeTutorButton.
+ * Removes a Tutor from the list based on the provided teacher ID.
+ */
         removeTutorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Retrieve teacher ID from text field and trim leading/trailing whitespace
                 String teacherID = teacherIDTextField.getText().trim();
 
                 try {
+                    // check if teacher ID input is empty string or not
                     if (!isValidInput(teacherID)) {
-                        JOptionPane.showMessageDialog(null, "Invalid input! Please enter a valid teacher ID.");
+                        JOptionPane.showMessageDialog(null, "Invalid input!! \nPlease enter a valid numeric value for the teacher ID.");
                         return;
                     }
-
+                    // Parsing teacher ID to integer
                     int teacherId = Integer.parseInt(teacherID);
 
+                    // Checking for negative values in teacher ID
                     if (isNegative(teacherId)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input! Input Field cannot have Negative Values");
+                                "Invalid input!! \nInput Field cannot have negative values.\n");
                         return;
                     }
 
+                    // Finding if Tutor object with given ID already exists or not 
                     Tutor tutor = (Tutor) findTutor(teacherId);
                     if (tutor != null) {
-                        // Take Conformation From User to Remove the tutor
+                        // Asking for confirmation before removing the tutor
                         int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
                                 "Confirmation", JOptionPane.YES_NO_OPTION);
                         if (option == 0) { // if it yes then do following
@@ -507,15 +608,17 @@ class MyFrame extends JFrame {
                             teachers.remove(tutor); // Removing the tutor object from the arrayList
                             JOptionPane.showMessageDialog(null,
                                     "Tutor with ID " + teacherID + " removed successfully.");
-                            clearTextField();
+                            clearTextField();// Clearing text fields after removing tutor
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
                     }
                 } catch (NumberFormatException h) {
+                    // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Please fill input fields with their specific values only.");
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
                 } catch (Exception y) {
+                    // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
                             "Invalid input! Tutor was not removed." + y);
                 }
@@ -523,9 +626,39 @@ class MyFrame extends JFrame {
         });
     }
 
-    // Here Comes Functions (Greatest of All Time) of this program
+
+
+
+
+
+
+
+
+
+
+/*
+
+                <<<  ---------  -----------   -----------   ----------    Important Method & Functions Section  ---------  -----------   -----------  ----------    >>>
+
+ */ 
+
+
+
+
+
+
+
+
+
+/**
+ * Method to add a new lecturer.
+ * Retrieves input values from text fields, validates them, and creates a new Lecturer object.
+ * Displays appropriate error messages if input is invalid or if a lecturer with the same ID already exists.
+ * Returns the newly created Lecturer object if successful, otherwise returns null.
+ */
 
     public Lecturer addLecturer() {
+        // Retrieving input values from text fields and trim leading/trailing whitespace
         String teacherID = teacherIDTextField.getText().trim();
         String teacherName = teacherNameTextField.getText().trim();
         String address = addressTextField.getText().trim();
@@ -538,53 +671,69 @@ class MyFrame extends JFrame {
         try{
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, department,
                 yearOfExperienceStr)) {
-            JOptionPane.showMessageDialog(null, "Invalid input! Please check for missing input fields.");
+            JOptionPane.showMessageDialog(null, "Oops! It looks like some fields are empty or contain invalid data. \nPlease fill in all required fields with accurate information.");
             return null;
         }
 
+            // Check if teacher with the same ID already exists
             if (findTeacher(Integer.parseInt(teacherID)) == null) {
 
                 int teacherId = Integer.parseInt(teacherID);
                 int workingHours = Integer.parseInt(workingHoursStr);
                 int yearOfExperience = Integer.parseInt(yearOfExperienceStr);
 
+                // Check for negative values in input fields
                 if (isNegative(teacherId, workingHours, yearOfExperience)) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot have Negative Values");
+                            "Invalid input!! \nInput Field cannot have negative values.\n");
                     return null;
                 }
-
+                // Check for numeric values in non-numeric fields
                 if((containsNumbers(department))||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
                     JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nand employment status fields. \nPlease correct your input.");
                     return null;
                 }
-                // new Lecturer object
+                // Creating new Lecturer object
                 Lecturer lecturer = new Lecturer(teacherId, teacherName, address, workingType, employmentStatus,
                         workingHours, department, yearOfExperience);
-
+                 // Displaying success message, clear text fields, and return newly created Lecturer object
                 JOptionPane.showMessageDialog(null, "Lecturer added successfully.");
                 clearTextField();
                 return lecturer;
 
             } else {
+                // Display error message if teacher with the same ID already exists
                 JOptionPane.showMessageDialog(null,
                         "Teacher with ID : " + Integer.parseInt(teacherID) + " already exists.");
             }
         
         return null;
     } catch (NumberFormatException e) {
+            // Display error message for invalid numerical input
         JOptionPane.showMessageDialog(null,
-                "Invalid input! Please fill input fields with their specific values only.");
+                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
         return null;
     } catch (Exception y) {
+            // Displaying a standard error message for other exceptions
         JOptionPane.showMessageDialog(null,
                 "Invalid input! Tutor was not added .");
         return null;
     }
     }
 
-    // new Tutor object
-    private Tutor addTutor() {
+
+
+/**
+ * Creates a new Tutor object with the input provided by the user.
+ * Validates the input fields and ensures they are not empty or contain invalid data.
+ * Displays appropriate error messages if input is invalid or if a teacher with the same ID already exists.
+ * Returns the newly created Tutor object if successfully added, otherwise returns null.
+ */
+
+
+ private Tutor addTutor() {
+
+        // Retrieve input values from text fields
         String teacherID = teacherIDTextField.getText().trim();
         String teacherName = teacherNameTextField.getText().trim();
         String address = addressTextField.getText().trim();
@@ -596,45 +745,58 @@ class MyFrame extends JFrame {
         String academyQualification = academyQualificationTextField.getText().trim();
         String specialization = specializationTextField.getText().trim();
 
+
+            // Check if all input fields are valid i.e thay are not empty string
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, salaryStr,
                 performanceIndexStr, academyQualification, specialization)) {
-            JOptionPane.showMessageDialog(null, "Invalid input! Please check for missing input fields.");
+            // Displaying error message for invalid or empty fields
+            JOptionPane.showMessageDialog(null, "Oops! It looks like some fields are empty or contain invalid data. \nPlease fill in all required fields with accurate information.");
             return null;
         }
         try {
+            // Checking if teacher with the same ID already exists
             if (findTeacher(Integer.parseInt(teacherID)) == null) {
-
+            
+                // Parsing String input values to integaer data types
                 int teacherId = Integer.parseInt(teacherID);
                 int workingHours = Integer.parseInt(workingHoursStr);
                 int salary = Integer.parseInt(salaryStr);
                 int performanceIndex = Integer.parseInt(performanceIndexStr);
 
+                // Checking if any numeric field is negative
                 if (isNegative(teacherId, workingHours, salary, performanceIndex)) {
                     JOptionPane.showMessageDialog(null,
-                            "Invalid input! Input Field cannot have Negative Values");
+                            "Invalid input! \nInput Field cannot have Negative Values");
                     return null;
                 }
+                           
+                // Checking if numeric values are present in non-numeric fields
                 if((containsNumbers(specialization))||containsNumbers(academyQualification)||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
                     JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nemployment status, specialization and academic qualificationfields. \nPlease correct your input.");
                     return null;
                 }
 
-                // new Tutor object
+                // Creating new Tutor object
                 Tutor tutor = new Tutor(teacherId, teacherName, address, workingType, employmentStatus, workingHours,
                         salary, specialization, academyQualification, performanceIndex);
 
+                                    
+                // Displaing success message
                 JOptionPane.showMessageDialog(null, "Tutor added successfully!");
-                clearTextField();
+                clearTextField(); // clearing TextFields after adding tutors
                 return tutor;
 
             } else {
+                // Displaying error message if teacher with the same ID already exists
                 JOptionPane.showMessageDialog(null,
                         "Teacher with ID : " + Integer.parseInt(teacherID) + " already exists.");
             }
+                // Displaying error message for invalid numerical input
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Invalid input! Please fill input fields with their specific values only.");
+                    "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
             return null;
+                 // Displaying a standard error message for other exceptions
         } catch (Exception y) {
             JOptionPane.showMessageDialog(null,
                     "Invalid input! Tutor was not added .");
@@ -643,8 +805,20 @@ class MyFrame extends JFrame {
         return null;
     }
 
-    // for clearing all textFields
+
+
+
+
+
+
+
+
+/**
+ * Clears all text fields in the GUI.
+ */
     public void clearTextField() {
+        
+        // Clear each text field in frame 
         teacherIDTextField.setText("");
         teacherNameTextField.setText("");
         addressTextField.setText("");
@@ -661,32 +835,214 @@ class MyFrame extends JFrame {
     }
 
 
-    public static boolean containsNumbers(String value) {
-        for (int i = 0; i < value.length(); i++) {
-            char character = value.charAt(i);
-            if (Character.isDigit(character)) {
-                return true;
+
+
+
+
+
+
+
+
+
+    
+
+
+
+/**
+ * Displays details of all lecturers in a new frame.
+ * If there are no lecturers to display, shows a message dialog.
+ */
+public void displayLecturer() {
+    int count = 0;
+
+    // Cheak if there exists any Lecturer type of object in ArrayList
+    for (Teacher teacher : teachers) {
+        if (teacher instanceof Lecturer) {
+
+            
+            // if any instance of Lecturer found increase the count value and break the loop 
+            count++;
+            break;
+        }
+    }
+    if (count <= 0) {
+        // If no lecturers found, display a message dialog
+        JOptionPane.showMessageDialog(null, "There are currently no Lecturers to display.");
+        return;
+    } else {
+        
+        // Creating a new frame to display lecturer details
+        JFrame displayLecturerFrame = new JFrame("Lecturer Details");
+        displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayLecturerFrame.setSize(940, 280);
+        displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
+
+        JPanel panel = new JPanel(new BorderLayout());
+        displayLecturerFrame.add(panel);
+
+        String[] columnNames = { "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
+                "Working Hour", "Department", "Year Of Experience" };
+        String[][] rowData = new String[teachers.size()][columnNames.length];
+
+        int rowIndex = 0;
+        // Iterate over the teachers list to populate the table data
+        for (Teacher teacher : teachers) {
+            if (teacher instanceof Lecturer) {
+                Lecturer lecturer = (Lecturer) teacher;
+                // Populate rowData with lecturer details
+                rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
+                rowData[rowIndex][1] = lecturer.getname();
+                rowData[rowIndex][2] = lecturer.getaddress();
+                rowData[rowIndex][3] = lecturer.getworking_type();
+                rowData[rowIndex][4] = lecturer.getemployment_status();
+                rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
+                rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
+                rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
+                rowIndex++;
             }
         }
-        return false;
+        // Creating a JTable with the rowData and columnNames
+        JTable table = new JTable(rowData, columnNames);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+
+        // Set preferred column widths for each column
+        table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
+        table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+        table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+        table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+        table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+        table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+        table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
+        table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
+
+         // Create a JScrollPane to contain the table
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // setting the visible property to true if display Lecturer button is pressed
+        displayLecturerFrame.setVisible(true);
     }
+}
 
-    // for checking Empty Field
-    /*
-     * Using Variable Arguments
-     * // for cheaking isValidMethod
-     * private boolean isValidInput(String... inputs) {
-     * for (String input : inputs) {
-     * String a = input.trim();
-     * if (a.equals("")) {
-     * return false;
-     * }
-     * }
-     * return true;
-     * }
-     */
 
-    // Using Method OverLoading
+
+
+
+
+
+
+
+/**
+* Displays details of all tutors in a new frame.
+* If there are no tutors to display, shows a message dialog.
+*/
+
+public void displayTutor() {
+
+    // will count the number of Tutor in the ArrayList
+    int count = 0;  // starting from zero 
+
+    // iterate over all the ArrayList element & check if there exists any Tutor type of object in ArrayList
+    for (Teacher teacher : teachers) {      
+        if (teacher instanceof Tutor) {
+
+            // if any instance of Tutor found increase the count value and break the loop 
+            count++;    
+            break;  
+        }
+    }
+    if (count <= 0) {   // check if there exists atleast one object of tutor in the list or not 
+        // if there are not even 1 object of tutor in the list display appropriate message and return 
+        JOptionPane.showMessageDialog(null, "There are currently no Tutors to display.");
+        return;
+    } else {            // if there are objects of tutor in the list do the following things 
+
+        // Creating a new frame to display Tutor details
+        JFrame displayTutorFrame = new JFrame("Tutor Details");     
+        displayTutorFrame.setTitle("Tutor Details");    
+        displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
+        displayTutorFrame.setSize(1135, 280); 
+        displayTutorFrame.setLocationRelativeTo(null);
+
+        // Creating a panel for the frame and adding it onto the frame 
+        JPanel panel = new JPanel(new BorderLayout());
+        displayTutorFrame.add(panel);
+
+        // Creating an array for holding column names
+        String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
+                "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
+
+        // Creating a two-dimensional array to hold the data for each teacher in the table
+        String[][] rowData = new String[teachers.size()][columnNames.length];
+
+        int rowIndex = 0;
+        for (Teacher teacher : teachers) {
+            if (teacher instanceof Tutor) {
+                Tutor tutor = (Tutor) teacher;
+                // Extracting data from each Tutor object and populating the table row by row
+                rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
+                rowData[rowIndex][1] = tutor.getname();
+                rowData[rowIndex][2] = tutor.getaddress();
+                rowData[rowIndex][3] = tutor.getworking_type();
+                rowData[rowIndex][4] = tutor.getemployment_status();
+                rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
+                rowData[rowIndex][6] = String.valueOf((int) tutor.getsalary());
+                rowData[rowIndex][7] = tutor.getspecialization();
+                rowData[rowIndex][8] = tutor.getacademic_qualifications();
+                rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
+                rowIndex++;
+            }
+        }
+        
+        // Initialized the JTable variable which will contain all the values of the Tutor
+        JTable table = new JTable(rowData, columnNames);       
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disabled auto-resizing of columns
+
+        // Set preferred column widths for each column
+        table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
+        table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+        table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+        table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+        table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+        table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+        table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
+        table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
+        table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
+        table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
+
+        JScrollPane scrollPane = new JScrollPane(table);    // initialed a JScrollpane to contain the table
+        panel.add(scrollPane, BorderLayout.CENTER);         // adding scrollPane to the panel of new Popup display Tutor frame
+
+        // if display tutor button is pressed set the visible property of the frame to true and display the frame 
+        displayTutorFrame.setVisible(true);
+    }   
+
+}
+
+
+
+
+
+
+
+
+
+/*
+
+                <<<  ---------  -----------   -----------   ----------    Simple Validation Method & Functions Section  ---------  -----------   -----------  ----------    >>>
+
+ */ 
+
+
+
+
+
+
+
+/**
+ * Checks if all given strings are not empty using Method OverLoading.
+ *  returns true if all strings are not empty, otherwise false.
+ */
 
     private boolean isValidInput(String a) {
         if (a.equals("")) {
@@ -726,12 +1082,30 @@ class MyFrame extends JFrame {
         return true;
     }
 
-    // Cheak For Negative Ones using Method OverLoading
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Cheak if the input is less than 0 
+     * if input < 0 return true otherwise, return false
+     */
 
     private boolean isNegative(int a) {
-        if (a < 0) {
-            return true;
-        }
+        if (a < 0) {          
+            return true;        
+
+        }  
         return false;
     }
 
@@ -749,181 +1123,119 @@ class MyFrame extends JFrame {
         return false;
     }
 
-    // cheking if teacher with the same id already exists in the ArrayList or not
-    // will cheak every id and found it the right one
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+ * Checks if a teacher with the same ID already exists in the ArrayList.
+ * Iterates through each teacher's ID and compares it with the given ID.
+ * Returns true if a teacher with the same ID is found, otherwise false.
+ */
 
     // for Teacher as a whole
     private Teacher findTeacher(int teacherId) {
-        for (Teacher teacher : teachers) {
-            if ((teacher instanceof Teacher) && (teacher.getteacher_id() == teacherId)) {
+        for (Teacher teacher : teachers) {  // iterate over each elements present in teacherlist 
+
+            // if its a instance of Teacher class and also the id matches return the object
+            if ((teacher instanceof Teacher) && (teacher.getteacher_id() == teacherId)) {   
                 return teacher;
             }
         }
         return null;
     }
 
+
+
     // for Lecturer
     private Lecturer findLecturer(int teacherId) {
-        for (Teacher teacher : teachers) {
+        for (Teacher teacher : teachers) {  // iterate over each elements present in teacherlist 
+
+            // if its a instance of Teacher class and also the id matches return the object of Teacher type 
             if ((teacher instanceof Lecturer) && (teacher.getteacher_id() == teacherId)) {
-                return (Lecturer) teacher; // Casting to Lecturer
+                return (Lecturer) teacher; // Casting to Lecturer class 
             }
         }
         return null;
     }
+
+
 
     // for Tutor
     private Tutor findTutor(int teacherId) {
 
-        for (Teacher teacher : teachers) {
+        for (Teacher teacher : teachers) {  // iterate over each elements present in teacherlist 
+
+            // if its a instance of Teacher class and also the id matches return the object of Teacher type 
             if ((teacher instanceof Tutor) && (teacher.getteacher_id() == teacherId)) {
-                return (Tutor) teacher;
+                return (Tutor) teacher; // Casting to Tutor class 
             }
         }
         return null;
     }
 
-    // For displaying Lecturer List inn the Program
-    public void displayLecturer() {
-        int count = 0;
 
-        // Cheak if there exists any Lecturer type of object in ArrayList
-        for (Teacher teacher : teachers) {
-            if (teacher instanceof Lecturer) {
-                count++;
-                break;
-            }
-        }
-        if (count <= 0) {
-            JOptionPane.showMessageDialog(null, "There are currently no Lecturers to display.");
-            return;
-        } else {
 
-            JFrame displayLecturerFrame = new JFrame("Lecturer Details");
-            displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            displayLecturerFrame.setSize(940, 280);
-            displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
-            JPanel panel = new JPanel(new BorderLayout());
-            displayLecturerFrame.add(panel);
 
-            String[] columnNames = { "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
-                    "Working Hour", "Department", "Year Of Experience" };
-            String[][] rowData = new String[teachers.size()][columnNames.length];
 
-            int rowIndex = 0;
-            for (Teacher teacher : teachers) {
-                if (teacher instanceof Lecturer) {
-                    Lecturer lecturer = (Lecturer) teacher;
-                    rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
-                    rowData[rowIndex][1] = lecturer.getname();
-                    rowData[rowIndex][2] = lecturer.getaddress();
-                    rowData[rowIndex][3] = lecturer.getworking_type();
-                    rowData[rowIndex][4] = lecturer.getemployment_status();
-                    rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
-                    rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
-                    rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
-                    rowIndex++;
-                }
-            }
 
-            JTable table = new JTable(rowData, columnNames);
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+/**
+ * Checks if the given string contains any numeric digits.
+ * takes input and cheak each character using charat and compare it with number using isDigit() method
+ * returns true if if contains number, otherwise false
+ */
+public static boolean containsNumbers(String value) {
 
-            // Set preferred column widths for each column
-            table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
-            table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
-            table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
-            table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
-            table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
-            table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
-            table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
-            table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
-
-            JScrollPane scrollPane = new JScrollPane(table);
-            panel.add(scrollPane, BorderLayout.CENTER);
-
-            displayLecturerFrame.setVisible(true);
+    // Iterating over each character in value
+    for (int i = 0; i < value.length(); i++) {
+        char character = value.charAt(i);
+        // Checking if the character is the digit
+        if (Character.isDigit(character)) {
+            return true;        // Return true if a digit is found
         }
     }
+    // Return false if no digits are found
+    return false;
+}
 
-    // For Displaying Tutor in The List
-    public void displayTutor() {
-
-        int count = 0;
-
-        // Cheak if there exists any Tutor type of object in ArrayList
-        for (Teacher teacher : teachers) {
-            if (teacher instanceof Tutor) {
-                count++;
-                break;
-            }
-        }
-        if (count <= 0) {
-            JOptionPane.showMessageDialog(null, "There are currently no Tutors to display.");
-            return;
-        } else {
-
-            JFrame displayTutorFrame = new JFrame("Tutor Details");
-            displayTutorFrame.setTitle("Tutor Details");
-            displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            displayTutorFrame.setSize(1135, 280);
-            displayTutorFrame.setLocationRelativeTo(null); // Center the frame on the screen
-
-            JPanel panel = new JPanel(new BorderLayout());
-            displayTutorFrame.add(panel);
-
-            String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
-                    "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
-            String[][] rowData = new String[teachers.size()][columnNames.length];
-
-            int rowIndex = 0;
-            for (Teacher teacher : teachers) {
-                if (teacher instanceof Tutor) {
-                    Tutor tutor = (Tutor) teacher;
-                    rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
-                    rowData[rowIndex][1] = tutor.getname();
-                    rowData[rowIndex][2] = tutor.getaddress();
-                    rowData[rowIndex][3] = tutor.getworking_type();
-                    rowData[rowIndex][4] = tutor.getemployment_status();
-                    rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
-                    rowData[rowIndex][6] = String.valueOf((int) tutor.getsalary());
-                    rowData[rowIndex][7] = tutor.getspecialization();
-                    rowData[rowIndex][8] = tutor.getacademic_qualifications();
-                    rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
-                    rowIndex++;
-                }
-            }
-
-            JTable table = new JTable(rowData, columnNames);
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
-
-            // Set preferred column widths for each column
-            table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
-            table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
-            table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
-            table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
-            table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
-            table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
-            table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
-            table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
-            table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
-            table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
-
-            JScrollPane scrollPane = new JScrollPane(table);
-            panel.add(scrollPane, BorderLayout.CENTER);
-
-            displayTutorFrame.setVisible(true);
-        }
-
-    }
 
 }
+
+
+
+
+
+
+
+
+/*
+
+                <<<  ---------  -----------   -----------   ----------    Main Method & Object Creation Section For Frane  ---------  -----------   -----------  ----------    >>>
+
+ */ 
+
+
+
+
+
+
+
+
 
 public class TeacherGUI extends Teacher {
 
     public static void main(String[] args) {
 
+        // Creating an object of the frame which will cause the constructor to display the frame 
         MyFrame frame = new MyFrame();
 
     }
