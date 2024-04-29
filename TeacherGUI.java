@@ -10,8 +10,6 @@ import javax.swing.JTable;
 class MyFrame extends JFrame {
 
 
-
-
     // ArrayList Declaration to Store Lecturer and Tutors Of Teacher Class
     ArrayList<Teacher> teachers = new ArrayList<>();
 
@@ -29,10 +27,6 @@ class MyFrame extends JFrame {
             specializationTextField;
 
 
-
-
-
-
     MyFrame() { // constructor
         // setting up the JFrame 
         setTitle("Teacher Database Portal ");       // for frame title
@@ -47,6 +41,9 @@ class MyFrame extends JFrame {
         // Grid layout for main frame
         setLayout(gridLayout); 
 
+
+
+        // For 1st Row of frame
         // For Teacher Input Fields **(Mandatory)
 
         // Initializing JLabels
@@ -108,11 +105,12 @@ class MyFrame extends JFrame {
 
 
 
+    
+        // For 2nd Row of Frame 
 
 
 
-
-        // Creating panel for 2nd row to include instructions,displaytutor and displaylecturer button and clear field
+        // Creating panel for 2nd row of frame to include instructions,displaytutor and displaylecturer button and clear field
         JPanel teacherButtonPanel = new JPanel(new BorderLayout());
 
         // Buttons For Displaying lecturer and tutor details 
@@ -215,8 +213,12 @@ class MyFrame extends JFrame {
 
 
 
+        // For 3rd Row of Frame 
+        
+        
+        
         // For Lecturer Panel
-
+        
         // Initializing JLabels
         departmentLabel = new JLabel("Department    :");
         gradedScoreLabel = new JLabel("Graded Score   :");
@@ -265,7 +267,7 @@ class MyFrame extends JFrame {
 
      
 
-        // Adding Tutor Class
+        // Adding Tutor Panel
 
         // Initializing JLabels
         salaryLabel = new JLabel("Salary   :");
@@ -452,7 +454,9 @@ class MyFrame extends JFrame {
                     }
                     // Check for numeric values in the department field
                     if(containsNumbers(department)){
-                        JOptionPane.showMessageDialog(null,"Invalid input! \nNumeric values are not allowed in the department field. \nPlease correct your input.");
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input! \nNumeric values are not allowed in the department field. "+
+                                    "\nPlease correct your input.");
                         return ;
                     }
 
@@ -512,7 +516,7 @@ class MyFrame extends JFrame {
                 try {
                     // check if teacher ID, salary or performanceindex input is empty string or not
                     if (!isValidInput(teacherID, salaryStr, performanceStr)) {
-                        // if the input field is empty string showing suitable message in information dialdog
+                        // if the input field is empty string showing suitable message in information dialog
                         JOptionPane.showMessageDialog(null,
                                 "Invalid input!! \nPlease check your entries for ID, Salary and Performance Index.");
                         return;
@@ -616,7 +620,8 @@ class MyFrame extends JFrame {
                 } catch (NumberFormatException h) {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                            "Oops! It seems you've entered invalid input. "+
+                                "\nPlease provide valid numerical values for numeric fields.");
                 } catch (Exception y) {
                     // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,
@@ -671,7 +676,9 @@ class MyFrame extends JFrame {
         try{
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, department,
                 yearOfExperienceStr)) {
-            JOptionPane.showMessageDialog(null, "Oops! It looks like some fields are empty or contain invalid data. \nPlease fill in all required fields with accurate information.");
+            JOptionPane.showMessageDialog(null, 
+                    "Oops! It looks like some fields are empty or contain invalid data. "+
+                            "\nPlease fill in all required fields with accurate information.");
             return null;
         }
 
@@ -689,8 +696,11 @@ class MyFrame extends JFrame {
                     return null;
                 }
                 // Check for numeric values in non-numeric fields
-                if((containsNumbers(department))||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
-                    JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nand employment status fields. \nPlease correct your input.");
+                if((containsNumbers(department))||containsNumbers(employmentStatus)||containsNumbers(workingType)
+                        ||containsNumbers(address)||containsNumbers(teacherName)){
+                    JOptionPane.showMessageDialog(null, 
+                            "Invalid input! \nNumeric values are not allowed in name, address, working type,"+
+                                "\nand employment status fields. \nPlease correct your input.");
                     return null;
                 }
                 // Creating new Lecturer object
@@ -750,7 +760,9 @@ class MyFrame extends JFrame {
         if (!isValidInput(teacherID, teacherName, address, workingType, employmentStatus, workingHoursStr, salaryStr,
                 performanceIndexStr, academyQualification, specialization)) {
             // Displaying error message for invalid or empty fields
-            JOptionPane.showMessageDialog(null, "Oops! It looks like some fields are empty or contain invalid data. \nPlease fill in all required fields with accurate information.");
+            JOptionPane.showMessageDialog(null, 
+                        "Oops! It looks like some fields are empty or contain invalid data. "
+                            +"\nPlease fill in all required fields with accurate information.");
             return null;
         }
         try {
@@ -771,8 +783,14 @@ class MyFrame extends JFrame {
                 }
                            
                 // Checking if numeric values are present in non-numeric fields
-                if((containsNumbers(specialization))||containsNumbers(academyQualification)||containsNumbers(employmentStatus)||containsNumbers(workingType)||containsNumbers(address)||containsNumbers(teacherName)){
-                    JOptionPane.showMessageDialog(null, "Invalid input! \nNumeric values are not allowed in name, address, working type,\nemployment status, specialization and academic qualificationfields. \nPlease correct your input.");
+                if((containsNumbers(specialization))||containsNumbers(academyQualification)
+                    ||containsNumbers(employmentStatus)||containsNumbers(workingType)
+                    ||containsNumbers(address)||containsNumbers(teacherName)){
+                        
+                    JOptionPane.showMessageDialog(null, 
+                        "Invalid input! \nNumeric values are not allowed in name, address, working type,"+
+                        "\nemployment status, specialization and academic qualificationfields. "
+                        +"\nPlease correct your input.");
                     return null;
                 }
 
@@ -794,7 +812,7 @@ class MyFrame extends JFrame {
                 // Displaying error message for invalid numerical input
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
+                "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for numeric fields.");
             return null;
                  // Displaying a standard error message for other exceptions
         } catch (Exception y) {
@@ -1010,7 +1028,7 @@ public void displayTutor() {
         table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
         table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
 
-        JScrollPane scrollPane = new JScrollPane(table);    // initialed a JScrollpane to contain the table
+        JScrollPane scrollPane = new JScrollPane(table);    // initialized a JScrollpane to contain the table
         panel.add(scrollPane, BorderLayout.CENTER);         // adding scrollPane to the panel of new Popup display Tutor frame
 
         // if display tutor button is pressed set the visible property of the frame to true and display the frame 
@@ -1219,7 +1237,7 @@ public static boolean containsNumbers(String value) {
 
 /*
 
-                <<<  ---------  -----------   -----------   ----------    Main Method & Object Creation Section For Frane  ---------  -----------   -----------  ----------    >>>
+                <<<  ---------  -----------   -----------   ----------    Main Method & Object Creation Section    ---------  -----------   -----------  ----------    >>>
 
  */ 
 
