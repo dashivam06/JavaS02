@@ -367,7 +367,15 @@ class MyFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearTextField();
+
+                int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all the fields?",
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+
+                    if(option == 0){
+                        clearTextField();
+                
+                    }
             }
         });
 
@@ -438,7 +446,7 @@ class MyFrame extends JFrame {
                     // Input validation
                     if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nPlease check your entries for Teacher ID, GradedScore, \nDepartment and Year of Experience.\n\n"+
+                                "\nInvalid input!! \nPlease check your entries for Teacher ID, GradedScore, \nDepartment and Year of Experience.\n\n"+
                                 "Note : See instructions for help." );
                         return;
                     }
@@ -523,7 +531,7 @@ class MyFrame extends JFrame {
                     if (!isValidInput(teacherID, salaryStr, performanceStr)) {
                         // if the input field is empty string showing suitable message in information dialog
                         JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nPlease check your entries for Teacher ID,\nSalary and Performance Index.\n\n"+
+                                "\nInvalid input!! \nPlease check your entries for Teacher ID,\nSalary and Performance Index.\n\n"+
                                 "Note : See instructions for help." );
                         return;
                     }
@@ -532,6 +540,7 @@ class MyFrame extends JFrame {
                     int teacherId = Integer.parseInt(teacherID);
                     int salary = Integer.parseInt(salaryStr);
                     int performanceIndex = Integer.parseInt(performanceStr);
+                   
 
                     // Checking for negative values
                     if (isNegative(teacherId, salary, performanceIndex)) {
@@ -546,16 +555,19 @@ class MyFrame extends JFrame {
                     if (tutor != null) {
                         // Calling set salary method and storing the returned boolean value onto a variable 
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
+
+                        int appraisal = (int)tutor.getsalary() - salary;
                         // if salary was set then show new salary and performance index in a dialog box 
                         if (isIncreased == true) {
                             JOptionPane.showMessageDialog(null,
                                     "Salary and performance index updated for Tutor ID : " + teacherID
                                             + "\nNew Salary : "
-                                            + salary + "\nUpdated Performance Index : " + performanceIndex);
+                                            + (int)tutor.getsalary() + "\nUpdated Performance Index : " + performanceIndex+
+                                            "\nBonus Amount : "+appraisal);
                             clearTextField();       // clearing textfields after setting salary 
                         } else {
                             // if salary was not set then displaying suitable information dialog
-                            JOptionPane.showMessageDialog(null, "Requirements didnt exactly meet for salary increment");
+                            JOptionPane.showMessageDialog(null, "Requirements not met for salary increment.");
 
                         }
                     } else {
@@ -597,7 +609,8 @@ class MyFrame extends JFrame {
                 try {
                     // check if teacher ID input is empty string or not
                     if (!isValidInput(teacherID)) {
-                        JOptionPane.showMessageDialog(null, "Invalid input!! \nPlease enter a valid numeric value for the teacher ID.\n\n"+
+                        JOptionPane.showMessageDialog(null, "\nInvalid input!! \n" + 
+                                                        "Please check your entries for Teacher ID\n\n"+
                         "Note : See instructions for help." );
                         return;
                     }
@@ -611,22 +624,24 @@ class MyFrame extends JFrame {
                         return;
                     }
 
+                    // Asking for confirmation before removing the tutor
+                    int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
+                    "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (option == 0) { 
                     // Finding if Tutor object with given ID already exists or not 
                     Tutor tutor = (Tutor) findTutor(teacherId);
                     if (tutor != null) {
-                        // Asking for confirmation before removing the tutor
-                        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
-                                "Confirmation", JOptionPane.YES_NO_OPTION);
-                        if (option == 0) { // if it yes then do following
+                        // if it yes then do following
                             tutor.removetutor(); // Calling the function to set all of its instances to default
                             teachers.remove(tutor); // Removing the tutor object from the arrayList
                             JOptionPane.showMessageDialog(null,
                                     "Tutor with ID " + teacherID + " removed successfully.");
                             clearTextField();// Clearing text fields after removing tutor
                         }
-                    } else {
+                    else {
                         JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
                     }
+                }
                 } catch (NumberFormatException h) {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
@@ -711,7 +726,8 @@ class MyFrame extends JFrame {
                         ||containsNumbers(address)||containsNumbers(teacherName)){
                     JOptionPane.showMessageDialog(null, 
                             "Invalid input! \nNumeric values are not allowed in name, address, working type,"+
-                                "\nand employment status fields. \nPlease correct your input.");
+                                "\nand employment status fields. \nPlease correct your input.\n\n"+
+                                "Note : See instructions for help." );
                     return null;
                 }
                 // Creating new Lecturer object
@@ -805,7 +821,8 @@ class MyFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, 
                         "Invalid input! \nNumeric values are not allowed in name, address, working type,"+
                         "\nemployment status, specialization and academic qualificationfields. "
-                        +"\nPlease correct your input.");
+                        +"\nPlease correct your input.\n\n"+
+                        "Note : See instructions for help." );
                     return null;
                 }
 
@@ -854,7 +871,9 @@ class MyFrame extends JFrame {
  * Clears all text fields in the GUI.
  */
     public void clearTextField() {
-        
+
+      
+
         // Clear each text field in frame 
         teacherIDTextField.setText("");
         teacherNameTextField.setText("");
@@ -869,6 +888,7 @@ class MyFrame extends JFrame {
         performanceIndexTextField.setText("");
         academyQualificationTextField.setText("");
         specializationTextField.setText("");
+                                
     }
 
 
@@ -944,7 +964,7 @@ public void displayLecturer() {
 
         // Set preferred column widths for each column
         table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
-        table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
+        table.getColumnModel().getColumn(1).setPreferredWidth(125); // Tutor Name
         table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
         table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
         table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
@@ -1040,7 +1060,7 @@ public void displayTutor() {
         table.getColumnModel().getColumn(1).setPreferredWidth(120); // Tutor Name
         table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
         table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
-        table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+        table.getColumnModel().getColumn(4).setPreferredWidth(120); // Employment Status
         table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
         table.getColumnModel().getColumn(6).setPreferredWidth(80); // Salary
         table.getColumnModel().getColumn(7).setPreferredWidth(130); // Specialization
@@ -1246,7 +1266,6 @@ public static boolean containsNumbers(String value) {
 
 
 }
-
 
 
 
