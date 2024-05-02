@@ -576,7 +576,7 @@ class MyFrame extends JFrame {
                 } catch (NumberFormatException f) {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for  "+                             
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for  \n"+                             
                              "1) Teacher ID \n"
                             +"2) Salary \n"
                             +"3) Perforamnce Index");
@@ -632,12 +632,17 @@ class MyFrame extends JFrame {
                     Tutor tutor = (Tutor) findTutor(teacherId);
                     if (tutor != null) {
                         // if it yes then do following
-                            tutor.removetutor(); // Calling the function to set all of its instances to default
+                            String removeornot = tutor.removetutor(); // Calling the function to set all of its instances to default
+                            if(removeornot.equals("Tutor Removed Successfully")){
                             teachers.remove(tutor); // Removing the tutor object from the arrayList
                             JOptionPane.showMessageDialog(null,
                                     "Tutor with ID " + teacherID + " removed successfully.");
                             clearTextField();// Clearing text fields after removing tutor
-                        }
+                        }else {
+                        JOptionPane.showMessageDialog(null,removeornot);
+                        return;
+                    }
+                    }
                     else {
                         JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
                     }
@@ -646,7 +651,8 @@ class MyFrame extends JFrame {
                     // Display error message for invalid numerical input
                     JOptionPane.showMessageDialog(null,
                             "Oops! It seems you've entered invalid input. "+
-                                "\nPlease provide valid numerical values for : \n1) Teacher ID");
+                                "\nPlease provide valid numerical values for : \n1) Teacher ID\n\n"+
+                                "Note : See instructions for help.");
                 } catch (Exception y) {
                     // Displaying standard error message for other exceptions
                     JOptionPane.showMessageDialog(null,

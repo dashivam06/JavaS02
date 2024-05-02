@@ -70,7 +70,7 @@ public class Tutor extends Teacher {
     }
 
     // Method For RemovingTutor If Tutor Has Not Been Certified Yet
-    public void removetutor() {
+    public String removetutor() {
 
         if (isCertified == false) // Check The Value Of (isCertified) If Its False Then Assign Values To The Tutor
         {
@@ -81,10 +81,10 @@ public class Tutor extends Teacher {
             this.performance_index = 0;
 
             this.isCertified = false; // Assigning The Value Of isCertified To False
-            System.out.println("Tutor Removed Successfully"); // Displaying A Suitable Message If Tutor Is Removed
+            return "Tutor Removed Successfully"; // Displaying A Suitable Message If Tutor Is Removed
         } else {
 
-            System.out.println("Tutor Was Not Removed");// Displaying A Suitable Message To Convey That Tutor Was Not
+            return "Tutor is cerified & cannot be removed";// Displaying A Suitable Message To Convey That Tutor Was Not
                                                         // Removed
         }
     }
