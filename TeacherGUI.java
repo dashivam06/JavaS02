@@ -468,15 +468,20 @@ class MyFrame extends JFrame {
                                     "\nPlease correct your input.");
                         return ;
                     }
+                    if(gradedScore>100){
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input!! \nGraded Score must be in range from 0 to 100.\n");
+                        return;
+                    }
 
                     // cheaking identity of lecturer to know if they exists already or not
                     Lecturer lecturer = findLecturer(teacherId);
                     if (lecturer != null) { // if lecturer exists then 
                         // Calling grade assignment method from Lecturer class
                         String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
-                        if (lecturer.gethasGraded()) {
+                        if (!result.equals("Teacher Not Eligible For Grade Assignment")) {
                             JOptionPane.showMessageDialog(null,
-                                    "( " + result + " ) Assigned and Grade assignment successful for lecturer "
+                                    "( " + result + " ) Assigned and Grade assignment successful From lecturer "
                                             + teacherID + "\nTeacher ID : " + teacherId + "\nGraded Score : "
                                             + gradedScore + "\nDepartment : " + department + "\nYears of Experience : "
                                             + yearsOfExperience);
@@ -556,9 +561,10 @@ class MyFrame extends JFrame {
                         // Calling set salary method and storing the returned boolean value onto a variable 
                         boolean isIncreased = tutor.setsalary(salary, performanceIndex);
 
-                        int appraisal = (int)tutor.getsalary() - salary;
+                        
                         // if salary was set then show new salary and performance index in a dialog box 
                         if (isIncreased == true) {
+                            int appraisal = (int)tutor.getsalary() - salary;
                             JOptionPane.showMessageDialog(null,
                                     "Salary and performance index updated for Tutor ID : " + teacherID
                                             + "\nNew Salary : "
@@ -633,7 +639,7 @@ class MyFrame extends JFrame {
                     if (tutor != null) {
                         // if it yes then do following
                             String removeornot = tutor.removetutor(); // Calling the function to set all of its instances to default
-                            if(removeornot.equals("Tutor Removed Successfully")){
+                            if(!removeornot.equals("Tutor is cerified & cannot be removed")){
                             teachers.remove(tutor); // Removing the tutor object from the arrayList
                             JOptionPane.showMessageDialog(null,
                                     "Tutor with ID " + teacherID + " removed successfully.");
@@ -736,6 +742,18 @@ class MyFrame extends JFrame {
                                 "Note : See instructions for help." );
                     return null;
                 }
+                
+                if(yearOfExperience>100)
+                {
+                    JOptionPane.showMessageDialog(null,"Year Of Experience must be a valid number.");
+                    return null;
+                }
+                
+                if(workingHours>168)
+                {
+                    JOptionPane.showMessageDialog(null,"Working Hours must in range from 1 to 168.");
+                    return null;
+                }
                 // Creating new Lecturer object
                 Lecturer lecturer = new Lecturer(teacherId, teacherName, address, workingType, employmentStatus,
                         workingHours, department, yearOfExperience);
@@ -829,6 +847,18 @@ class MyFrame extends JFrame {
                         "\nemployment status, specialization and academic qualificationfields. "
                         +"\nPlease correct your input.\n\n"+
                         "Note : See instructions for help." );
+                    return null;
+                }
+                
+                if(performanceIndex>10)
+                {
+                    JOptionPane.showMessageDialog(null,"Performance Index value ranges from 1 to 10.");
+                    return null;
+                }
+                
+                if(workingHours>168)
+                {
+                    JOptionPane.showMessageDialog(null,"Working Hours value ranges from 1 to 168.");
                     return null;
                 }
 
