@@ -11,16 +11,16 @@ class MyFrame extends JFrame {
 
 
     // ArrayList Declaration to Store Lecturer and Tutors Of Teacher Class
-    ArrayList<Teacher> teachers = new ArrayList<>();
+    private ArrayList<Teacher> teachers = new ArrayList<>();
 
     // decleration of every JLabel Elements used in program
-    JLabel teacherIDLabel, teacherNameLabel, addressLabel, workingTypeLabel,
+    private JLabel teacherIDLabel, teacherNameLabel, addressLabel, workingTypeLabel,
             employmentStatusLabel, workingHoursLabel, departmentLabel, gradedScoreLabel,
             yearOfExperienceLabel, salaryLabel, performanceIndexLabel,
             academyQualificationLabel, specializationLabel;
 
     // decleration of every JLabel Elements used in program
-    JTextField teacherIDTextField, teacherNameTextField, addressTextField,
+    private JTextField teacherIDTextField, teacherNameTextField, addressTextField,
             workingTypeTextField, employmentStatusTextField, workingHoursTextField,
             departmentTextField, gradedScoreTextField, yearOfExperienceTextField,
             salaryTextField, performanceIndexTextField, academyQualificationTextField,
@@ -436,76 +436,7 @@ class MyFrame extends JFrame {
  gradeAssignmentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Retrieve input values from text fields and trim leading/trailing whitespace
-                String teacherID = teacherIDTextField.getText().trim();
-                String gradeStr = gradedScoreTextField.getText().trim();
-                String department = departmentTextField.getText().trim();
-                String yearStr = yearOfExperienceTextField.getText().trim();
-
-                try {
-                    // Input validation
-                    if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
-                        JOptionPane.showMessageDialog(null,
-                                "\nInvalid input!! \nPlease check your entries for Teacher ID, GradedScore, \nDepartment and Year of Experience.\n\n"+
-                                "Note : See instructions for help." );
-                        return;
-                    }
-
-                    int teacherId = Integer.parseInt(teacherID);
-                    int gradedScore = Integer.parseInt(gradeStr);
-                    int yearsOfExperience = Integer.parseInt(yearStr);
-
-                    // Checking for negative values
-                    if (isNegative(teacherId, gradedScore, yearsOfExperience)) {
-                        JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nInput Field cannot have negative values.\n");
-                        return;
-                    }
-                    // Check for numeric values in the department field
-                    if(containsNumbers(department)){
-                        JOptionPane.showMessageDialog(null,
-                                "Invalid input! \nNumeric values are not allowed in the department field. "+
-                                    "\nPlease correct your input.");
-                        return ;
-                    }
-                    if(gradedScore>100){
-                        JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nGraded Score must be in range from 0 to 100.\n");
-                        return;
-                    }
-
-                    // cheaking identity of lecturer to know if they exists already or not
-                    Lecturer lecturer = findLecturer(teacherId);
-                    if (lecturer != null) { // if lecturer exists then 
-                        // Calling grade assignment method from Lecturer class
-                        String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
-                        if (!result.equals("Teacher Not Eligible For Grade Assignment")) {
-                            JOptionPane.showMessageDialog(null,
-                                    "( " + result + " ) Assigned and Grade assignment successful From lecturer "
-                                            + teacherID + "\nTeacher ID : " + teacherId + "\nGraded Score : "
-                                            + gradedScore + "\nDepartment : " + department + "\nYears of Experience : "
-                                            + yearsOfExperience);
-                            clearTextField();   // clearing textfield after gradingAssignment
-                        } else {
-                            JOptionPane.showMessageDialog(null, result);
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Lecturer with ID " + teacherID + " not found.");
-                    }
-                } catch (NumberFormatException g) {
-                    // Display error message for invalid numerical input
-                    JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for :\n"+
-                            "1) Teacher ID \n"
-                            +"2) Graded Score \n"
-                            +"3) Year Of Experience \n"
-                           );
-                } catch (Exception z) {
-                    // Displaying standard error message for other exceptions
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! \nGrade cannot be assigned.");
-                }
+               gradeAssignment();
             }
         });
 
@@ -526,71 +457,7 @@ class MyFrame extends JFrame {
             @Override
 
             public void actionPerformed(ActionEvent e) {        
-                // Retrieve input values from text fields and trim leading/trailing whitespace
-                String teacherID = teacherIDTextField.getText().trim();
-                String salaryStr = salaryTextField.getText().trim();
-                String performanceStr = performanceIndexTextField.getText().trim();
-
-                try {
-                    // check if teacher ID, salary or performanceindex input is empty string or not
-                    if (!isValidInput(teacherID, salaryStr, performanceStr)) {
-                        // if the input field is empty string showing suitable message in information dialog
-                        JOptionPane.showMessageDialog(null,
-                                "\nInvalid input!! \nPlease check your entries for Teacher ID,\nSalary and Performance Index.\n\n"+
-                                "Note : See instructions for help." );
-                        return;
-                    }
-
-                    // Parsing input strings to integers
-                    int teacherId = Integer.parseInt(teacherID);
-                    int salary = Integer.parseInt(salaryStr);
-                    int performanceIndex = Integer.parseInt(performanceStr);
-                   
-
-                    // Checking for negative values
-                    if (isNegative(teacherId, salary, performanceIndex)) {
-                         // if the input field is a negative value showing suitable message in information dialdog
-                        JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nInput Field cannot have negative values.\n");
-                        return;
-                    }
-
-                    // Finding tutor to know if they exists already or not
-                    Tutor tutor = findTutor(teacherId);
-                    if (tutor != null) {
-                        // Calling set salary method and storing the returned boolean value onto a variable 
-                        boolean isIncreased = tutor.setsalary(salary, performanceIndex);
-
-                        
-                        // if salary was set then show new salary and performance index in a dialog box 
-                        if (isIncreased == true) {
-                            int appraisal = (int)tutor.getsalary() - salary;
-                            JOptionPane.showMessageDialog(null,
-                                    "Salary and performance index updated for Tutor ID : " + teacherID
-                                            + "\nNew Salary : "
-                                            + (int)tutor.getsalary() + "\nUpdated Performance Index : " + performanceIndex+
-                                            "\nBonus Amount : "+appraisal);
-                            clearTextField();       // clearing textfields after setting salary 
-                        } else {
-                            // if salary was not set then displaying suitable information dialog
-                            JOptionPane.showMessageDialog(null, "Requirements not met for salary increment.");
-
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
-                    }
-                } catch (NumberFormatException f) {
-                    // Display error message for invalid numerical input
-                    JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for  \n"+                             
-                             "1) Teacher ID \n"
-                            +"2) Salary \n"
-                            +"3) Perforamnce Index");
-                } catch (Exception y) {
-                    // Displaying standard error message for other exceptions
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Salary was not set.");
-                }
+                setSalary();
             }
         });
 
@@ -609,70 +476,11 @@ class MyFrame extends JFrame {
         removeTutorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Retrieve teacher ID from text field and trim leading/trailing whitespace
-                String teacherID = teacherIDTextField.getText().trim();
-
-                try {
-                    // check if teacher ID input is empty string or not
-                    if (!isValidInput(teacherID)) {
-                        JOptionPane.showMessageDialog(null, "\nInvalid input!! \n" + 
-                                                        "Please check your entries for Teacher ID\n\n"+
-                        "Note : See instructions for help." );
-                        return;
-                    }
-                    // Parsing teacher ID to integer
-                    int teacherId = Integer.parseInt(teacherID);
-
-                    // Checking for negative values in teacher ID
-                    if (isNegative(teacherId)) {
-                        JOptionPane.showMessageDialog(null,
-                                "Invalid input!! \nInput Field cannot have negative values.\n");
-                        return;
-                    }
-
-                    // Asking for confirmation before removing the tutor
-                    int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
-                    "Confirmation", JOptionPane.YES_NO_OPTION);
-            if (option == 0) { 
-                    // Finding if Tutor object with given ID already exists or not 
-                    Tutor tutor = (Tutor) findTutor(teacherId);
-                    if (tutor != null) {
-                        // if it yes then do following
-                            String removeornot = tutor.removetutor(); // Calling the function to set all of its instances to default
-                            if(!removeornot.equals("Tutor is cerified & cannot be removed")){
-                            teachers.remove(tutor); // Removing the tutor object from the arrayList
-                            JOptionPane.showMessageDialog(null,
-                                    "Tutor with ID " + teacherID + " removed successfully.");
-                            clearTextField();// Clearing text fields after removing tutor
-                        }else {
-                        JOptionPane.showMessageDialog(null,removeornot);
-                        return;
-                    }
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
-                    }
-                }
-                } catch (NumberFormatException h) {
-                    // Display error message for invalid numerical input
-                    JOptionPane.showMessageDialog(null,
-                            "Oops! It seems you've entered invalid input. "+
-                                "\nPlease provide valid numerical values for : \n1) Teacher ID\n\n"+
-                                "Note : See instructions for help.");
-                } catch (Exception y) {
-                    // Displaying standard error message for other exceptions
-                    JOptionPane.showMessageDialog(null,
-                            "Invalid input! Tutor was not removed." + y);
-                }
+               removeTutor();
             }
+        
         });
     }
-
-
-
-
-
-
 
 
 
@@ -745,7 +553,7 @@ class MyFrame extends JFrame {
                 
                 if(yearOfExperience>100)
                 {
-                    JOptionPane.showMessageDialog(null,"Year Of Experience must be a valid number.");
+                    JOptionPane.showMessageDialog(null,"Year Of Experience must be valid.");
                     return null;
                 }
                 
@@ -897,10 +705,210 @@ class MyFrame extends JFrame {
 
 
 
+    public void gradeAssignment()
+    {
+                // Retrieve input values from text fields and trim leading/trailing whitespace
+                String teacherID = teacherIDTextField.getText().trim();
+                String gradeStr = gradedScoreTextField.getText().trim();
+                String department = departmentTextField.getText().trim();
+                String yearStr = yearOfExperienceTextField.getText().trim();
+
+                try {
+                    // Input validation
+                    if (!isValidInput(teacherID, gradeStr, yearStr, department)) {
+                        JOptionPane.showMessageDialog(null,
+                                "\nInvalid input!! \nPlease check your entries for Teacher ID, GradedScore, \nDepartment and Year of Experience.\n\n"+
+                                "Note : See instructions for help." );
+                        return;
+                    }
+
+                    int teacherId = Integer.parseInt(teacherID);
+                    int gradedScore = Integer.parseInt(gradeStr);
+                    int yearsOfExperience = Integer.parseInt(yearStr);
+
+                    // Checking for negative values
+                    if (isNegative(teacherId, gradedScore, yearsOfExperience)) {
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input!! \nInput Field cannot have negative values.\n");
+                        return;
+                    }
+                    // Check for numeric values in the department field
+                    if(containsNumbers(department)){
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input! \nNumeric values are not allowed in the department field. "+
+                                    "\nPlease correct your input.");
+                        return ;
+                    }
+                    if(gradedScore>100){
+                        JOptionPane.showMessageDialog(null,
+                                "Invalid input!! \nGraded Score must be in range from 0 to 100.\n");
+                        return;
+                    }
+
+                    // cheaking identity of lecturer to know if they exists already or not
+                    Lecturer lecturer = findLecturer(teacherId);
+                    if (lecturer != null) { // if lecturer exists then 
+                        // Calling grade assignment method from Lecturer class
+                        String result = lecturer.gradeAssignment(gradedScore, department, yearsOfExperience);
+                        if (!result.equals("Teacher Not Eligible For Grade Assignment")) {
+                            JOptionPane.showMessageDialog(null,
+                                    "( " + result + " ) Assigned and Grade assignment successful From lecturer "
+                                            + teacherID + "\nTeacher ID : " + teacherId + "\nGraded Score : "
+                                            + gradedScore + "\nDepartment : " + department + "\nYears of Experience : "
+                                            + yearsOfExperience);
+                            clearTextField();   // clearing textfield after gradingAssignment
+                        } else {
+                            JOptionPane.showMessageDialog(null, result);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Lecturer with ID " + teacherID + " not found.");
+                    }
+                } catch (NumberFormatException g) {
+                    // Display error message for invalid numerical input
+                    JOptionPane.showMessageDialog(null,
+                            "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for :\n"+
+                            "1) Teacher ID \n"
+                            +"2) Graded Score \n"
+                            +"3) Year Of Experience \n"
+                           );
+                } catch (Exception z) {
+                    // Displaying standard error message for other exceptions
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input! \nGrade cannot be assigned.");
+                }
+    }
 
 
+    public void removeTutor()
+    {
+        // Retrieve teacher ID from text field and trim leading/trailing whitespace
+        String teacherID = teacherIDTextField.getText().trim();
+
+        try {
+            // check if teacher ID input is empty string or not
+            if (!isValidInput(teacherID)) {
+                JOptionPane.showMessageDialog(null, "\nInvalid input!! \n" + 
+                                                "Please check your entries for Teacher ID\n\n"+
+                "Note : See instructions for help." );
+                return;
+            }
+            // Parsing teacher ID to integer
+            int teacherId = Integer.parseInt(teacherID);
+
+            // Checking for negative values in teacher ID
+            if (isNegative(teacherId)) {
+                JOptionPane.showMessageDialog(null,
+                        "Invalid input!! \nInput Field cannot have negative values.\n");
+                return;
+            }
+
+            // Asking for confirmation before removing the tutor
+            int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to proceed?",
+            "Confirmation", JOptionPane.YES_NO_OPTION);
+    if (option == 0) { 
+            // Finding if Tutor object with given ID already exists or not 
+            Tutor tutor = (Tutor) findTutor(teacherId);
+            if (tutor != null) {
+                // if it yes then do following
+                    String removeornot = tutor.removetutor(); // Calling the function to set all of its instances to default
+                    if(!removeornot.equals("Tutor is cerified & cannot be removed")){
+                    teachers.remove(tutor); // Removing the tutor object from the arrayList
+                    JOptionPane.showMessageDialog(null,
+                            "Tutor with ID " + teacherID + " removed successfully.");
+                    clearTextField();// Clearing text fields after removing tutor
+                }else {
+                JOptionPane.showMessageDialog(null,removeornot);
+                return;
+            }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
+            }
+        }
+        } catch (NumberFormatException h) {
+            // Display error message for invalid numerical input
+            JOptionPane.showMessageDialog(null,
+                    "Oops! It seems you've entered invalid input. "+
+                        "\nPlease provide valid numerical values for : \n1) Teacher ID\n\n"+
+                        "Note : See instructions for help.");
+        } catch (Exception y) {
+            // Displaying standard error message for other exceptions
+            JOptionPane.showMessageDialog(null,
+                    "Invalid input! Tutor was not removed." + y);
+        }
+    
+    } 
 
 
+    public void setSalary()
+    {
+            // Retrieve input values from text fields and trim leading/trailing whitespace
+            String teacherID = teacherIDTextField.getText().trim();
+            String salaryStr = salaryTextField.getText().trim();
+            String performanceStr = performanceIndexTextField.getText().trim();
+
+            try {
+                // check if teacher ID, salary or performanceindex input is empty string or not
+                if (!isValidInput(teacherID, salaryStr, performanceStr)) {
+                    // if the input field is empty string showing suitable message in information dialog
+                    JOptionPane.showMessageDialog(null,
+                            "\nInvalid input!! \nPlease check your entries for Teacher ID,\nSalary and Performance Index.\n\n"+
+                            "Note : See instructions for help." );
+                    return;
+                }
+
+                // Parsing input strings to integers
+                int teacherId = Integer.parseInt(teacherID);
+                int salary = Integer.parseInt(salaryStr);
+                int performanceIndex = Integer.parseInt(performanceStr);
+               
+
+                // Checking for negative values
+                if (isNegative(teacherId, salary, performanceIndex)) {
+                     // if the input field is a negative value showing suitable message in information dialdog
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid input!! \nInput Field cannot have negative values.\n");
+                    return;
+                }
+
+                // Finding tutor to know if they exists already or not
+                Tutor tutor = findTutor(teacherId);
+                if (tutor != null) {
+                    // Calling set salary method and storing the returned boolean value onto a variable 
+                    boolean isIncreased = tutor.setsalary(salary, performanceIndex);
+
+                    
+                    // if salary was set then show new salary and performance index in a dialog box 
+                    if (isIncreased == true) {
+                        int appraisal = (int)tutor.getsalary() - salary;
+                        JOptionPane.showMessageDialog(null,
+                                "Salary and performance index updated for Tutor ID : " + teacherID
+                                        + "\nNew Salary : "
+                                        + (int)tutor.getsalary() + "\nUpdated Performance Index : " + performanceIndex+
+                                        "\nBonus Amount : "+appraisal);
+                        clearTextField();       // clearing textfields after setting salary 
+                    } else {
+                        // if salary was not set then displaying suitable information dialog
+                        JOptionPane.showMessageDialog(null, "Requirements not met for salary increment.");
+
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Tutor with ID " + teacherID + " not found.");
+                }
+            } catch (NumberFormatException f) {
+                // Display error message for invalid numerical input
+                JOptionPane.showMessageDialog(null,
+                        "Oops! It seems you've entered invalid input. \nPlease provide valid numerical values for  \n"+                             
+                         "1) Teacher ID \n"
+                        +"2) Salary \n"
+                        +"3) Perforamnce Index");
+            } catch (Exception y) {
+                // Displaying standard error message for other exceptions
+                JOptionPane.showMessageDialog(null,
+                        "Invalid input! Salary was not set.");
+            }
+    }
 
 
 /**
