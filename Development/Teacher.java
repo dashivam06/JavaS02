@@ -1,5 +1,8 @@
 
-public class Teacher implements Comparable<Teacher>{
+import java.util.Comparator;
+
+
+public class Teacher  {
     // Decleration Of Instance Variables
     private int teacher_id;
     private String name;
@@ -73,20 +76,68 @@ public class Teacher implements Comparable<Teacher>{
                  // Suitable Annotation
             System.out.println("Working_Hour = " + this.getworking_hours());
         }
-
-
-
-
-
-        
-    }
-
-
-
-    @Override
-    public int compareTo(Teacher o) {
-        return ((Integer)teacher_id).compareTo((Integer)o.getteacher_id());
+   
     }
 
    
+}
+
+
+
+// < ------------------------------- Commparator Classes ------------------------------------->
+
+
+
+class SortByID implements Comparator<Teacher>
+{
+
+    @Override
+    public int compare(Teacher o1, Teacher o2) {
+        return ((Integer)o1.getteacher_id()).compareTo((Integer)o2.getteacher_id());
+        
+    }
+    
+}
+
+
+class SortByName implements Comparator<Teacher>
+{
+
+    @Override
+    public int compare(Teacher o1, Teacher o2) {
+        return o1.getname().compareTo(o2.getname());
+        
+    }
+    
+}
+
+class SortByEmployementStatus implements Comparator<Teacher>
+{
+
+    @Override
+    public int compare(Teacher o1, Teacher o2) {
+
+
+        int result =  o1.getemployment_status().compareTo(o2.getemployment_status());
+
+        result = (result!=0)?result:o1.getworking_type().compareTo(o2.getworking_type());
+
+
+        if ((result == 0 ) && (o1 instanceof Tutor && o2 instanceof Tutor))
+        {
+            result = Integer.compare(((Tutor) o1).getperformance_index(), (((Tutor) o2).getperformance_index()));
+            return (result!=0)?result:Double.compare(((Tutor) o1).getsalary(), (((Tutor) o2).getsalary()));
+        }
+
+        if ((result == 0 ) && (o1 instanceof Lecturer && o2 instanceof Lecturer))
+        {
+            result =  ((Lecturer) o1).getdepartment().compareTo(((Lecturer) o2).getdepartment());
+
+            return (result!=0)?result:Integer.compare(((Lecturer) o1).getyearOfExperience(), (((Lecturer) o2).getyearOfExperience()));
+        }
+     
+        return result;
+        
+    }
+    
 }

@@ -572,7 +572,7 @@ class MyFrame extends JFrame {
                         workingHours, department, yearOfExperience);
                  // Displaying success message, clear text fields, and return newly created Lecturer object
                 JOptionPane.showMessageDialog(null, "Lecturer added successfully.");
-                clearTextField();
+                // clearTextField();
                 return lecturer;
 
             } else {
@@ -682,7 +682,7 @@ class MyFrame extends JFrame {
                                     
                 // Displaing success message
                 JOptionPane.showMessageDialog(null, "Tutor added successfully!");
-                clearTextField(); // clearing TextFields after adding tutors
+                // clearTextField(); // clearing TextFields after adding tutors
                 return tutor;
 
             } else {
@@ -958,7 +958,10 @@ public void displayLecturer() {
         String[][] rowData = new String[teachers.size()][columnNames.length];
 
         int rowIndex = 0;
-        Collections.sort(teachers);
+        Collections.sort(teachers,new SortByEmployementStatus());
+        // Collections.sort(teachers,new SortByName());
+        // Collections.sort(teachers);
+
         // Iterate over the teachers list to populate the table data
         for (Teacher teacher : teachers) {
             if (teacher instanceof Lecturer) {
@@ -1049,7 +1052,8 @@ public void displayTutor() {
         // Creating a two-dimensional array to hold the data for each teacher in the table
         String[][] rowData = new String[teachers.size()][columnNames.length];
        
-        Collections.sort(teachers);
+        // Collections.sort(teachers);
+        Collections.sort(teachers,new SortByEmployementStatus());
         int rowIndex = 0;
         for (Teacher teacher : teachers) {
             if (teacher instanceof Tutor) {
