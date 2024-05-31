@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 import javax.swing.JTable;
 
 class MyFrame extends JFrame {
@@ -955,6 +958,7 @@ public void displayLecturer() {
         String[][] rowData = new String[teachers.size()][columnNames.length];
 
         int rowIndex = 0;
+        Collections.sort(teachers);
         // Iterate over the teachers list to populate the table data
         for (Teacher teacher : teachers) {
             if (teacher instanceof Lecturer) {
@@ -1044,7 +1048,8 @@ public void displayTutor() {
 
         // Creating a two-dimensional array to hold the data for each teacher in the table
         String[][] rowData = new String[teachers.size()][columnNames.length];
-
+       
+        Collections.sort(teachers);
         int rowIndex = 0;
         for (Teacher teacher : teachers) {
             if (teacher instanceof Tutor) {

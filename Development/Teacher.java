@@ -1,5 +1,5 @@
 
-public class Teacher {
+public class Teacher implements Comparable<Teacher>{
     // Decleration Of Instance Variables
     private int teacher_id;
     private String name;
@@ -74,6 +74,19 @@ public class Teacher {
             System.out.println("Working_Hour = " + this.getworking_hours());
         }
 
+
+
+
+
+        
     }
 
+
+
+    @Override
+    public int compareTo(Teacher o) {
+        return ((Integer)teacher_id).compareTo((Integer)o.getteacher_id());
+    }
+
+   
 }
