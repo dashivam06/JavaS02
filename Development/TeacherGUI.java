@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import javax.swing.JTable;
@@ -153,7 +152,7 @@ class MyFrame extends JFrame {
         JLabel instruction6 = new JLabel(
                 "     6)   To remove Tutor provide with correct Tutor ID in Teacher ID Field.");
         JLabel instruction7 = new JLabel(
-                "     7)   To display Lecturer's or Tutor's details kindly check console window ( Terminal ) . ");
+                "     7)   To display Lecturer's or Tutor's details kindly press their respective dispaly button . ");
 
         // Setting Font for the Instruction Portion
         note.setFont(new Font("Consolas", Font.BOLD, 15));
@@ -572,7 +571,7 @@ class MyFrame extends JFrame {
                         workingHours, department, yearOfExperience);
                  // Displaying success message, clear text fields, and return newly created Lecturer object
                 JOptionPane.showMessageDialog(null, "Lecturer added successfully.");
-                // clearTextField();
+                clearTextField();
                 return lecturer;
 
             } else {
@@ -682,7 +681,7 @@ class MyFrame extends JFrame {
                                     
                 // Displaing success message
                 JOptionPane.showMessageDialog(null, "Tutor added successfully!");
-                // clearTextField(); // clearing TextFields after adding tutors
+                clearTextField(); // clearing TextFields after adding tutors
                 return tutor;
 
             } else {
