@@ -107,6 +107,11 @@ class SortByID implements Comparator<Teacher> {
     }
 }
 
+
+
+
+
+
 class SortByName implements Comparator<Teacher> {
     private boolean ascending;
 
@@ -125,6 +130,10 @@ class SortByName implements Comparator<Teacher> {
         }
     }
 }
+
+
+
+
 
 
 class SortByEmployementStatus implements Comparator<Teacher>
