@@ -87,32 +87,54 @@ public class Teacher  {
 // < ------------------------------- Commparator Classes ------------------------------------->
 
 
+class SortByID implements Comparator<Teacher> {
+    private boolean ascending;
 
-class SortByID implements Comparator<Teacher>
-{
+    // Constructor to set the sorting direction
+    public SortByID(boolean ascending) {
+        this.ascending = ascending;
+    }
 
     @Override
     public int compare(Teacher o1, Teacher o2) {
-        return ((Integer)o1.getteacher_id()).compareTo((Integer)o2.getteacher_id());
-        
+        if (ascending) {
+            // Ascending sorting
+            return Integer.compare(o1.getteacher_id(), o2.getteacher_id());
+        } else {
+            // Descending sorting
+            return Integer.compare(o2.getteacher_id(), o1.getteacher_id());
+        }
     }
-    
 }
 
+class SortByName implements Comparator<Teacher> {
+    private boolean ascending;
 
-class SortByName implements Comparator<Teacher>
-{
+    public SortByName(boolean ascending) {
+        this.ascending = ascending;
+    }
 
     @Override
     public int compare(Teacher o1, Teacher o2) {
-        return o1.getname().compareTo(o2.getname());
-        
+        if (ascending) {
+            // Ascending sorting
+            return o1.getname().compareTo(o2.getname());
+        } else {
+            // Descending sorting
+            return o2.getname().compareTo(o1.getname());
+        }
     }
-    
 }
+
 
 class SortByEmployementStatus implements Comparator<Teacher>
 {
+
+    private boolean ascending;
+    public SortByEmployementStatus(boolean ascending)
+    {
+        this.ascending = ascending;
+    }
 
     @Override
     public int compare(Teacher o1, Teacher o2) {
@@ -136,7 +158,12 @@ class SortByEmployementStatus implements Comparator<Teacher>
             return (result!=0)?result:Integer.compare(((Lecturer) o1).getyearOfExperience(), (((Lecturer) o2).getyearOfExperience()));
         }
      
-        return result;
+        if(ascending){
+             return result;
+        }else{
+             // Negate the result to sort in descending order
+            return -result;
+        }
         
     }
     

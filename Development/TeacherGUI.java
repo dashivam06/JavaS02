@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 class MyFrame extends JFrame {
 
@@ -28,6 +29,7 @@ class MyFrame extends JFrame {
             salaryTextField, performanceIndexTextField, academyQualificationTextField,
             specializationTextField;
 
+    private JRadioButton ascending,descending;
 
     MyFrame() { // constructor
         // setting up the JFrame 
@@ -512,6 +514,13 @@ class MyFrame extends JFrame {
  */
 
     public Lecturer addLecturer() {
+
+
+        teachers.add(new Lecturer(10, "Shivam Thakur","Patan, Lalitpur" ,"Full Time", "Active",52,"Information System",5));
+        teachers.add(new Lecturer(7, "Pushkar Sah","Kalanki, Kathmandu" ,"Part Time", "InActive", 62,"Computing", 9));
+        teachers.add(new Lecturer(8, "Sandesh Pandey","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41,"Multimedia", 7));
+        teachers.add(new Lecturer(12, "Binayak Prajapati","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31,"Development", 6));
+    
         // Retrieving input values from text fields and trim leading/trailing whitespace
         String teacherID = teacherIDTextField.getText().trim();
         String teacherName = teacherNameTextField.getText().trim();
@@ -608,6 +617,13 @@ class MyFrame extends JFrame {
 
 
  private Tutor addTutor() {
+
+
+    teachers.add(new Tutor(4, "Shivam Thakur","Patan, Lalitpur" ,"Full Time", "Active", 30, 90000, "Java Programming","Bsc Computing", 5));
+    teachers.add(new Tutor(1, "Pushkar Sah","Kalanki, Kathmandu" ,"Part Time", "InActive", 62, 42000, "React Native","Bsc Computing", 9));
+    teachers.add(new Tutor(3, "Sandesh Pandey","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41, 80000, "SpringBoot","Multimedia", 7));
+    teachers.add(new Tutor(2, "Binayak Prajapati","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31, 61000, "Django","Intermidiate", 6));
+
 
         // Retrieve input values from text fields
         String teacherID = teacherIDTextField.getText().trim();
@@ -923,6 +939,152 @@ class MyFrame extends JFrame {
 /**
  * Displays details of all lecturers in a new frame.
  * If there are no lecturers to display, shows a message dialog.
+//  */
+// public void displayLecturer() {
+//     int count = 0;
+
+//     // Cheak if there exists any Lecturer type of object in ArrayList
+//     for (Teacher teacher : teachers) {
+//         if (teacher instanceof Lecturer) {
+
+            
+//             // if any instance of Lecturer found increase the count value and break the loop 
+//             count++;
+//             break;
+//         }
+//     }
+//     if (count <= 0) {
+//         // If no lecturers found, display a message dialog
+//         JOptionPane.showMessageDialog(null, "There are currently no Lecturers to display.");
+//         return;
+//     } else {
+        
+//         // Creating a new frame to display lecturer details
+//         JFrame displayLecturerFrame = new JFrame("Lecturer Details");
+//         displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//         displayLecturerFrame.setSize(940, 300);
+//         displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
+
+//         JPanel panel = new JPanel(new BorderLayout());
+//         displayLecturerFrame.add(panel);
+
+//         String[] columnNames = { "ID", "Lecturer Name", "Address", "Working Type", "Employment Status",
+//                 "Working Hour", "Department", "Year Of Experience" };
+//         String[][] rowData = new String[teachers.size()][columnNames.length];
+
+//         int rowIndex = 0;
+//         Collections.sort(teachers,new SortByEmployementStatus(true));
+//         // Collections.sort(teachers,new SortByName());
+//         // Collections.sort(teachers);
+
+
+     
+
+
+
+//         // Iterate over the teachers list to populate the table data
+//         for (Teacher teacher : teachers) {
+//             if (teacher instanceof Lecturer) {
+//                 Lecturer lecturer = (Lecturer) teacher;
+//                 // Populate rowData with lecturer details
+//                 rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
+//                 rowData[rowIndex][1] = lecturer.getname();
+//                 rowData[rowIndex][2] = lecturer.getaddress();
+//                 rowData[rowIndex][3] = lecturer.getworking_type();
+//                 rowData[rowIndex][4] = lecturer.getemployment_status();
+//                 rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
+//                 rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
+//                 rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
+//                 rowIndex++;
+//             }
+//         }
+//         // Creating a JTable with the rowData and columnNames
+//         JTable table = new JTable(rowData, columnNames);
+//         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+//         table.setEnabled(false);
+
+
+//         // Set preferred column widths for each column
+//         table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
+//         table.getColumnModel().getColumn(1).setPreferredWidth(125); // Tutor Name
+//         table.getColumnModel().getColumn(2).setPreferredWidth(160); // Address
+//         table.getColumnModel().getColumn(3).setPreferredWidth(110); // Working Type
+//         table.getColumnModel().getColumn(4).setPreferredWidth(130); // Employment Status
+//         table.getColumnModel().getColumn(5).setPreferredWidth(100); // Working Hour
+//         table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
+//         table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
+
+
+
+
+
+
+//         // Create a menu bar
+//         JPanel northSection = new JPanel(new GridLayout());
+
+//         // Create a panel for the sort by label and combo box
+//         JPanel sortByPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//         JLabel sortByLabel = new JLabel("Sort By:");
+//         JComboBox<String> sortByComboBox = new JComboBox<>(new String[]{"Teacher ID ", "Teacher Name ", "Teacher Department"});
+
+
+//         // sortByPanel.setPreferredSize(new Dimension(900,100));
+//         sortByPanel.add(sortByLabel);
+//         sortByPanel.add(sortByComboBox);
+
+//         JLabel icon = new JLabel(" ");
+//         // Create a text field for entering the search query
+//         JTextField searchTextField = new JTextField(12);
+//         searchTextField.setPreferredSize(new Dimension(250, 15));
+//         // Create a search button
+//         JButton searchButton = new JButton("Search  🔍 ");
+//         // searchButton.setPreferredSize(new Dimension(100,0));
+//         searchButton.addActionListener(new ActionListener() {
+//             @Override
+//             public void actionPerformed(ActionEvent e) {
+//                 String searchText = searchTextField.getText().toLowerCase();
+//                 TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+//                 table.setRowSorter(sorter);
+
+//                 if (searchText.trim().isEmpty()) {
+//                     sorter.setRowFilter(null);
+//                 } else {
+//                     sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+//                 }
+//             }
+//         });
+
+//         JPanel upperSection = new JPanel(new GridLayout());
+
+//         northSection.add(searchTextField);
+//         northSection.add(searchButton);
+//         northSection.add(icon);
+
+//         JPanel tempPanel = new JPanel(new FlowLayout());
+//         tempPanel.add(northSection);
+//         upperSection.add(tempPanel);
+//         upperSection.add(sortByPanel);
+//         panel.add(upperSection,BorderLayout.NORTH);
+       
+
+//         // panel.add(sortByPanel, BorderLayout.NORTH);
+
+//          // Create a JScrollPane to contain the table
+//         JScrollPane scrollPane = new JScrollPane(table);
+//         panel.add(scrollPane, BorderLayout.CENTER);
+
+//         // setting the visible property to true if display Lecturer button is pressed
+//         displayLecturerFrame.setVisible(true);
+//     }
+// }
+
+
+
+
+
+/**
+ * Displays details of all lecturers in a new frame.
+ * If there are no lecturers to display, shows a message dialog.
  */
 public void displayLecturer() {
     int count = 0;
@@ -946,7 +1108,7 @@ public void displayLecturer() {
         // Creating a new frame to display lecturer details
         JFrame displayLecturerFrame = new JFrame("Lecturer Details");
         displayLecturerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        displayLecturerFrame.setSize(940, 280);
+        displayLecturerFrame.setSize(940, 300);
         displayLecturerFrame.setLocationRelativeTo(null); // Center the frame on the screen
 
         JPanel panel = new JPanel(new BorderLayout());
@@ -956,30 +1118,127 @@ public void displayLecturer() {
                 "Working Hour", "Department", "Year Of Experience" };
         String[][] rowData = new String[teachers.size()][columnNames.length];
 
-        int rowIndex = 0;
-        Collections.sort(teachers,new SortByEmployementStatus());
-        // Collections.sort(teachers,new SortByName());
-        // Collections.sort(teachers);
 
-        // Iterate over the teachers list to populate the table data
-        for (Teacher teacher : teachers) {
-            if (teacher instanceof Lecturer) {
-                Lecturer lecturer = (Lecturer) teacher;
-                // Populate rowData with lecturer details
-                rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
-                rowData[rowIndex][1] = lecturer.getname();
-                rowData[rowIndex][2] = lecturer.getaddress();
-                rowData[rowIndex][3] = lecturer.getworking_type();
-                rowData[rowIndex][4] = lecturer.getemployment_status();
-                rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
-                rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
-                rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
-                rowIndex++;
-            }
-        }
-        // Creating a JTable with the rowData and columnNames
+             // Initialized the JTable variable which will contain all the values of the
+        // Tutor
         JTable table = new JTable(rowData, columnNames);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disable auto-resizing of columns
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disabled auto-resizing of columns
+        table.setEnabled(false);
+       
+ // For UpperPart Section that holds the search box and other things like filtering out data with the help of sort by button
+
+        JPanel upperPanel = new JPanel(new BorderLayout());
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        ButtonGroup radioButtonGroup = new ButtonGroup();
+
+        ascending = new JRadioButton("Low to High");
+        descending = new JRadioButton("Other      ");
+
+        radioButtonGroup.add(ascending);
+        radioButtonGroup.add(descending);
+
+        ascending.setSelected(true);
+
+        rightPanel.add(ascending);
+        rightPanel.add(descending);
+
+        JLabel sortByLabel = new JLabel("Sort By:");
+        JComboBox<String> sortByComboBox = new JComboBox<>(
+                new String[] { "Teacher ID ", "Teacher Name ", "Employement Status" });
+
+        rightPanel.add(sortByLabel);
+        rightPanel.add(sortByComboBox);
+
+        JTextField searchBox = new JTextField(15);
+        JButton searchButton = new JButton("Search  🔍 ");
+
+        // I have no idea what the heck is this Sorry, But it was generated by ChatGPT...
+  
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = searchBox.getText().toLowerCase();
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+                table.setRowSorter(sorter);
+
+                if (searchText.trim().isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+                }
+            }
+        });
+
+        leftPanel.add(searchBox);
+        leftPanel.add(searchButton);
+
+        upperPanel.add(rightPanel, BorderLayout.EAST);
+        upperPanel.add(leftPanel, BorderLayout.WEST);
+
+        panel.add(upperPanel, BorderLayout.NORTH);
+          // ActionListener for DisplayTutor Button
+
+          ActionListener listenerForSortByComboBox = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JComboBox comboBox = (JComboBox) e.getSource(); // Get the source JComboBox
+                String selectedOption = (String) comboBox.getSelectedItem();
+
+                sortingTeachers(selectedOption);
+
+                
+
+            int rowIndex = 0;
+            // Iterate over the teachers list to populate the table data
+            for (Teacher teacher : teachers) {
+                if (teacher instanceof Lecturer) {
+                    Lecturer lecturer = (Lecturer) teacher;
+                    // Populate rowData with lecturer details
+                    rowData[rowIndex][0] = String.valueOf(lecturer.getteacher_id());
+                    rowData[rowIndex][1] = lecturer.getname();
+                    rowData[rowIndex][2] = lecturer.getaddress();
+                    rowData[rowIndex][3] = lecturer.getworking_type();
+                    rowData[rowIndex][4] = lecturer.getemployment_status();
+                    rowData[rowIndex][5] = String.valueOf(lecturer.getworking_hours());
+                    rowData[rowIndex][6] = String.valueOf(lecturer.getdepartment());
+                    rowData[rowIndex][7] = String.valueOf(lecturer.getyearOfExperience());
+                    rowIndex++;
+                }
+        }
+        table.repaint(); // Update the table automatically
+
+    }
+};
+
+         // Actionlistener for RadioButton
+
+        ActionListener listenerForRadioBtn = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                listenerForSortByComboBox.actionPerformed(new ActionEvent(sortByComboBox, ActionEvent.ACTION_PERFORMED, null));
+
+            }
+            
+        };
+
+        ascending.addActionListener(listenerForRadioBtn);
+        descending.addActionListener(listenerForRadioBtn);
+
+
+
+        sortByComboBox.addActionListener(listenerForSortByComboBox);
+
+
+        sortByComboBox.setSelectedIndex(0); //  rebundant in this case 
+
+        listenerForSortByComboBox.actionPerformed(new ActionEvent(sortByComboBox, ActionEvent.ACTION_PERFORMED, null));
+
 
         // Set preferred column widths for each column
         table.getColumnModel().getColumn(0).setPreferredWidth(50); // ID
@@ -991,16 +1250,17 @@ public void displayLecturer() {
         table.getColumnModel().getColumn(6).setPreferredWidth(140); // Department
         table.getColumnModel().getColumn(7).setPreferredWidth(115); // Year Of Experience
 
-         // Create a JScrollPane to contain the table
-        JScrollPane scrollPane = new JScrollPane(table);
-        panel.add(scrollPane, BorderLayout.CENTER);
+
+
+
+        JScrollPane scrollPane = new JScrollPane(table); // initialized a JScrollpane to contain the table
+        panel.add(scrollPane, BorderLayout.CENTER); // adding scrollPane to the panel of new Popup display Tutor frame
+       
 
         // setting the visible property to true if display Lecturer button is pressed
         displayLecturerFrame.setVisible(true);
     }
 }
-
-
 
 
 
@@ -1016,31 +1276,33 @@ public void displayLecturer() {
 public void displayTutor() {
 
     // will count the number of Tutor in the ArrayList
-    int count = 0;  // starting from zero 
+    int count = 0; // starting from zero
 
-    // iterate over all the ArrayList element & check if there exists any Tutor type of object in ArrayList
-    for (Teacher teacher : teachers) {      
+    // iterate over all the ArrayList element & check if there exists any Tutor type
+    // of object in ArrayList
+    for (Teacher teacher : teachers) {
         if (teacher instanceof Tutor) {
 
-            // if any instance of Tutor found increase the count value and break the loop 
-            count++;    
-            break;  
+            // if any instance of Tutor found increase the count value and break the loop
+            count++;
+            break;
         }
     }
-    if (count <= 0) {   // check if there exists atleast one object of tutor in the list or not 
-        // if there are not even 1 object of tutor in the list display appropriate message and return 
+    if (count <= 0) { // check if there exists atleast one object of tutor in the list or not
+        // if there are not even 1 object of tutor in the list display appropriate
+        // message and return
         JOptionPane.showMessageDialog(null, "There are currently no Tutors to display.");
         return;
-    } else {            // if there are objects of tutor in the list do the following things 
+    } else { // if there are objects of tutor in the list do the following things
 
         // Creating a new frame to display Tutor details
-        JFrame displayTutorFrame = new JFrame("Tutor Details");     
-        displayTutorFrame.setTitle("Tutor Details");    
-        displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
-        displayTutorFrame.setSize(1135, 280); 
+        JFrame displayTutorFrame = new JFrame("Tutor Details");
+        displayTutorFrame.setTitle("Tutor Details");
+        displayTutorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayTutorFrame.setSize(1135, 280);
         displayTutorFrame.setLocationRelativeTo(null);
 
-        // Creating a panel for the frame and adding it onto the frame 
+        // Creating a panel for the frame and adding it onto the frame
         JPanel panel = new JPanel(new BorderLayout());
         displayTutorFrame.add(panel);
 
@@ -1048,33 +1310,131 @@ public void displayTutor() {
         String[] columnNames = { "ID", "Tutor Name", "Address", "Working Type", "Employment Status",
                 "Working Hour", "Salary", "Specialization", "Academic Qualification", "Performance Index" };
 
-        // Creating a two-dimensional array to hold the data for each teacher in the table
+        // Creating a two-dimensional array to hold the data for each teacher in the
+        // table
         String[][] rowData = new String[teachers.size()][columnNames.length];
-       
-        // Collections.sort(teachers);
-        Collections.sort(teachers,new SortByEmployementStatus());
-        int rowIndex = 0;
-        for (Teacher teacher : teachers) {
-            if (teacher instanceof Tutor) {
-                Tutor tutor = (Tutor) teacher;
-                // Extracting data from each Tutor object and populating the table row by row
-                rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
-                rowData[rowIndex][1] = tutor.getname();
-                rowData[rowIndex][2] = tutor.getaddress();
-                rowData[rowIndex][3] = tutor.getworking_type();
-                rowData[rowIndex][4] = tutor.getemployment_status();
-                rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
-                rowData[rowIndex][6] = String.valueOf((int) tutor.getsalary());
-                rowData[rowIndex][7] = tutor.getspecialization();
-                rowData[rowIndex][8] = tutor.getacademic_qualifications();
-                rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
-                rowIndex++;
-            }
-        }
+
         
-        // Initialized the JTable variable which will contain all the values of the Tutor
-        JTable table = new JTable(rowData, columnNames);       
+        // Initialized the JTable variable which will contain all the values of the
+        // Tutor
+        JTable table = new JTable(rowData, columnNames);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); // Disabled auto-resizing of columns
+        table.setEnabled(false);
+
+        // For UpperPart Section that holds the search box and other things like filtering out data with the help of sort by button
+
+        JPanel upperPanel = new JPanel(new BorderLayout());
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        ButtonGroup radioButtonGroup = new ButtonGroup();
+
+        ascending = new JRadioButton("Low to High");
+        descending = new JRadioButton("Other      ");
+
+        radioButtonGroup.add(ascending);
+        radioButtonGroup.add(descending);
+
+        ascending.setSelected(true);
+
+        rightPanel.add(ascending);
+        rightPanel.add(descending);
+
+        JLabel sortByLabel = new JLabel("Sort By:");
+        JComboBox<String> sortByComboBox = new JComboBox<>(
+                new String[] { "Teacher ID ", "Teacher Name ", "Employement Status" });
+
+        rightPanel.add(sortByLabel);
+        rightPanel.add(sortByComboBox);
+
+        JTextField searchBox = new JTextField(15);
+        JButton searchButton = new JButton("Search  🔍 ");
+
+        // I have no idea what the heck is this Sorry, But it was generated by ChatGPT...
+  
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String searchText = searchBox.getText().toLowerCase();
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+                table.setRowSorter(sorter);
+
+                if (searchText.trim().isEmpty()) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+                }
+            }
+        });
+
+        leftPanel.add(searchBox);
+        leftPanel.add(searchButton);
+
+        upperPanel.add(rightPanel, BorderLayout.EAST);
+        upperPanel.add(leftPanel, BorderLayout.WEST);
+
+        panel.add(upperPanel, BorderLayout.NORTH);
+
+        // ActionListener for DisplayTutor Button
+
+        ActionListener listenerForSortByComboBox = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JComboBox comboBox = (JComboBox) e.getSource(); // Get the source JComboBox
+                String selectedOption = (String) comboBox.getSelectedItem();
+
+                sortingTeachers(selectedOption);
+
+                int rowIndex = 0;
+                for (Teacher teacher : teachers) {
+                    if (teacher instanceof Tutor) {
+                        Tutor tutor = (Tutor) teacher;
+                        // Extracting data from each Tutor object and populating the table row by row
+                        rowData[rowIndex][0] = String.valueOf(tutor.getteacher_id());
+                        rowData[rowIndex][1] = tutor.getname();
+                        rowData[rowIndex][2] = tutor.getaddress();
+                        rowData[rowIndex][3] = tutor.getworking_type();
+                        rowData[rowIndex][4] = tutor.getemployment_status();
+                        rowData[rowIndex][5] = String.valueOf(tutor.getworking_hours());
+                        rowData[rowIndex][6] = String.valueOf((int) tutor.getsalary());
+                        rowData[rowIndex][7] = tutor.getspecialization();
+                        rowData[rowIndex][8] = tutor.getacademic_qualifications();
+                        rowData[rowIndex][9] = String.valueOf(tutor.getperformance_index());
+                        rowIndex++;
+                    }
+                }
+                table.repaint(); // Update the table automatically
+
+            }
+        };
+
+
+        // Actionlistener for RadioButton
+
+        ActionListener listenerForRadioBtn = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                listenerForSortByComboBox.actionPerformed(new ActionEvent(sortByComboBox, ActionEvent.ACTION_PERFORMED, null));
+
+            }
+            
+        };
+
+        ascending.addActionListener(listenerForRadioBtn);
+        descending.addActionListener(listenerForRadioBtn);
+
+
+
+        sortByComboBox.addActionListener(listenerForSortByComboBox);
+
+
+        sortByComboBox.setSelectedIndex(0); //  rebundant in this case 
+
+        listenerForSortByComboBox.actionPerformed(new ActionEvent(sortByComboBox, ActionEvent.ACTION_PERFORMED, null));
 
         // Set preferred column widths for each column
         table.getColumnModel().getColumn(0).setPreferredWidth(45); // ID
@@ -1088,18 +1448,13 @@ public void displayTutor() {
         table.getColumnModel().getColumn(8).setPreferredWidth(140); // Academic Qualification
         table.getColumnModel().getColumn(9).setPreferredWidth(120); // Performance Index
 
-        JScrollPane scrollPane = new JScrollPane(table);    // initialized a JScrollpane to contain the table
-        panel.add(scrollPane, BorderLayout.CENTER);         // adding scrollPane to the panel of new Popup display Tutor frame
+        JScrollPane scrollPane = new JScrollPane(table); // initialized a JScrollpane to contain the table
+        panel.add(scrollPane, BorderLayout.CENTER); // adding scrollPane to the panel of new Popup display Tutor frame
 
-        // if display tutor button is pressed set the visible property of the frame to true and display the frame 
+        // if display tutor button is pressed set the visible property of the frame to true and display the frame
         displayTutorFrame.setVisible(true);
-    }   
-
+    }
 }
-
-
-
-
 
 
 
@@ -1299,6 +1654,11 @@ public void clearTextField() {
 
 
 
+
+
+
+
+
 /**
  * Checks if the given string contains any numeric digits.
  * takes input and cheak each character using charat and compare it with number using isDigit() method
@@ -1319,16 +1679,47 @@ public static boolean containsNumbers(String value) {
 }
 
 
+
+
+
+
+/**
+ * Sorts the list of teachers based on the selected option and ascending/descending order.
+ *
+ * This method takes a `selectedOption` string representing the user's choice from the "Sort By" combobox
+ * and sorts the `teachers` list accordingly. It also considers the selection state of the "ascending" radio button
+ * to determine the sorting order (ascending or descending).
+*/
+
+
+    public void sortingTeachers(String selectedOption)
+    {
+        if (selectedOption.trim().equals("Teacher ID")) {
+            if(ascending.isSelected()){
+                Collections.sort(teachers, new SortByID(true));
+                
+            }else{
+            Collections.sort(teachers, new SortByID(false));
+            }
+        } else if (selectedOption.trim().equals("Teacher Name")) {
+            if(ascending.isSelected()){
+                Collections.sort(teachers, new SortByName(true));
+            }else{
+            Collections.sort(teachers, new SortByName(false));
+            }
+        } else {
+            if(ascending.isSelected()){
+                Collections.sort(teachers, new SortByEmployementStatus(true));
+            }else{
+            Collections.sort(teachers, new SortByEmployementStatus(false));
+            }
+        }
+    }
+    
+
 }
 
-
-
-
-
-
-
 /*
-
                 <<<  ---------  -----------   -----------   ----------    Main Method & Object Creation Section    ---------  -----------   -----------  ----------    >>>
 
  */ 
