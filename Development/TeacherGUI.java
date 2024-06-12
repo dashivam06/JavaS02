@@ -46,6 +46,24 @@ class MyFrame extends JFrame {
         setLayout(gridLayout); 
 
 
+        // Added Some Sample Teachers to the ArrayList for Display Feature
+
+
+        teachers.add(new Tutor(111, "Shivam Thakur","Patan, Lalitpur" ,"Full Time", "Active", 30, 90000, "Java Programming","Bsc Computing", 5));
+        teachers.add(new Tutor(113, "Sandesh Pandey","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41, 80000, "SpringBoot","Multimedia", 7));
+        teachers.add(new Tutor(112, "Pushkar Sah","Kalanki, Kathmandu" ,"Part Time", "InActive", 62, 42000, "React Native","Bsc Computing", 9));
+        teachers.add(new Tutor(114, "Binayak Prajapati","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31, 61000, "Django","Intermidiate", 6));
+
+
+
+
+        teachers.add(new Lecturer(117, "Akshay Thakur","Patan, Lalitpur" ,"Full Time", "Active",52,"Information System",5));
+        teachers.add(new Lecturer(115, "Aarya Acharya","Kalanki, Kathmandu" ,"Part Time", "InActive", 62,"Computing", 9));
+        teachers.add(new Lecturer(118, "Abhisha Singh","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41,"Multimedia", 7));
+        teachers.add(new Lecturer(116, "Brijal Maharjan","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31,"Development", 6));
+    
+
+
 
         // For 1st Row of frame
         // For Teacher Input Fields **(Mandatory)
@@ -516,11 +534,6 @@ class MyFrame extends JFrame {
     public Lecturer addLecturer() {
 
 
-        teachers.add(new Lecturer(10, "Shivam Thakur","Patan, Lalitpur" ,"Full Time", "Active",52,"Information System",5));
-        teachers.add(new Lecturer(7, "Pushkar Sah","Kalanki, Kathmandu" ,"Part Time", "InActive", 62,"Computing", 9));
-        teachers.add(new Lecturer(8, "Sandesh Pandey","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41,"Multimedia", 7));
-        teachers.add(new Lecturer(12, "Binayak Prajapati","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31,"Development", 6));
-    
         // Retrieving input values from text fields and trim leading/trailing whitespace
         String teacherID = teacherIDTextField.getText().trim();
         String teacherName = teacherNameTextField.getText().trim();
@@ -617,12 +630,6 @@ class MyFrame extends JFrame {
 
 
  private Tutor addTutor() {
-
-
-    teachers.add(new Tutor(4, "Shivam Thakur","Patan, Lalitpur" ,"Full Time", "Active", 30, 90000, "Java Programming","Bsc Computing", 5));
-    teachers.add(new Tutor(1, "Pushkar Sah","Kalanki, Kathmandu" ,"Part Time", "InActive", 62, 42000, "React Native","Bsc Computing", 9));
-    teachers.add(new Tutor(3, "Sandesh Pandey","Sanothimi, Bhaktapur" ,"Full Time", " Active", 41, 80000, "SpringBoot","Multimedia", 7));
-    teachers.add(new Tutor(2, "Binayak Prajapati","Kalabinayak, Bhaktapur" ,"Part Time", "Notice Period", 31, 61000, "Django","Intermidiate", 6));
 
 
         // Retrieve input values from text fields
